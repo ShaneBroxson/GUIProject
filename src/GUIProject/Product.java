@@ -1,4 +1,6 @@
 /**
+ * @file Product.java
+ * @breif File to initialize Product.
  * @Author Shane Broxson
  */
 package GUIProject;

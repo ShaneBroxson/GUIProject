@@ -1,3 +1,8 @@
+/**
+ * @file MoviePlayer.java
+ * @breif Establishes what information MoviePlayer holds.
+ * @Author Shane Broxson
+ */
 package GUIProject;
 
 import java.util.Arrays;

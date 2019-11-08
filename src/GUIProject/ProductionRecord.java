@@ -1,6 +1,6 @@
 /**
- * @file Controller.java
- * @breif Controller class for fxml file.
+ * @file ProductionRecord.java
+ * @breif Used to create Production Record based on Product Details.
  * @author Shane Broxson
  */
 package GUIProject;

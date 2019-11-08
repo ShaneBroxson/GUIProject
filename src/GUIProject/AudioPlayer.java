@@ -1,3 +1,8 @@
+/**
+ * @file AudioPlayer.java
+ * @breif Extension for ItemType Audio.
+ * @author Shane Broxson
+ */
 package GUIProject;
 
 public class AudioPlayer extends Product implements MultimediaControl {

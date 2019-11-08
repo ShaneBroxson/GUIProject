@@ -1,3 +1,8 @@
+/**
+ * @file Screen.java
+ * @breif Establishes screen details for MoviePlayer.
+ * @Author Shane Broxson
+ */
 package GUIProject;
 
 public class Screen implements ScreenSpec {
