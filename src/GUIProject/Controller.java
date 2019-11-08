@@ -73,7 +73,7 @@ public class Controller {
             // Create Table Columns for Produce Tab in GUI
             TableColumn<Product, Integer> col_id = new TableColumn<>("ID");
             col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
-            col_id.setMinWidth(60);
+            col_id.setMinWidth(54);
             TableColumn<Product, String> col_name = new TableColumn<>("Name");
             col_name.setCellValueFactory(new PropertyValueFactory<>("name"));
             col_name.setMinWidth(100);
@@ -82,23 +82,23 @@ public class Controller {
             col_type.setMinWidth(100);
             TableColumn<Product, String> col_man = new TableColumn<>("Manufacturer");
             col_man.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
-            col_man.setMinWidth(155);
+            col_man.setMinWidth(150);
             productChoice.getColumns().addAll(col_id, col_name, col_type, col_man);
 
             // Create Table Columns for Product Line in GUI
             TableColumn<Product, Integer> col_id2 = new TableColumn<>("ID");
             col_id2.setCellValueFactory(new PropertyValueFactory<>("id"));
-            col_id2.setMinWidth(40);
-            col_id2.setPrefWidth(40);
+            col_id2.setMinWidth(50);
+            col_id2.setPrefWidth(50);
             TableColumn<Product, String> col_name2 = new TableColumn<>("Name");
             col_name2.setCellValueFactory(new PropertyValueFactory<>("name"));
             col_name2.setMinWidth(80);
             TableColumn<Product, String> col_type2 = new TableColumn<>("Type");
             col_type2.setCellValueFactory(new PropertyValueFactory<>("type"));
-            col_type2.setMinWidth(80);
+            col_type2.setMinWidth(100);
             TableColumn<Product, String> col_man2 = new TableColumn<>("Manufacturer");
             col_man2.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
-            col_man2.setMinWidth(117);
+            col_man2.setMinWidth(140);
             products_table.getColumns().addAll(col_id2, col_name2, col_type2, col_man2);
 
             // Create Table Columns for Production Log in GUI
