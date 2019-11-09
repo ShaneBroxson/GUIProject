@@ -24,7 +24,6 @@ public class Product implements Item {
         name = n;
         manufacturer = m;
         types = t;
-        abr = t.getAbr();
     }
 
     public String toString() {

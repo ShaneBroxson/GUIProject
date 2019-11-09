@@ -24,8 +24,8 @@ public class ProductionRecord {
 
         this.prodID = W.getId();
         //create a better counting system for serial num
-        String manUpdate = W.getManufacturer().replaceAll(" ","_").substring(0,3);
-        serialNum = manUpdate + W.getAbr() + String.format("%05d", produced++);
+        String manUpdate = W.getManufacturer().replaceAll(" ","_").toUpperCase().substring(0,3);
+        serialNum = manUpdate + W.getTypes().item_type_abr + String.format("%05d", produced++);
         currentDate = new Date();
     }
     ProductionRecord(int prodNum, int prodID, String serialNum, Date currentDate){

@@ -185,7 +185,7 @@ public class Controller {
     public void record_prod() {
         // pulls information from table row and places into object Product
         Product testing = productChoice.getItems().get(productChoice.getSelectionModel().getFocusedIndex());
-
+        System.out.println(testing.getType());
         // change string to enum type
         ItemType typeSwitch = null;
         switch (testing.getType()) {
@@ -195,10 +195,10 @@ public class Controller {
             case "VISUAL":
                 typeSwitch = ItemType.VISUAL;
                 break;
-            case "Audio Mobile":
+            case "AUDIO_MOBILE":
                 typeSwitch = ItemType.AUDIO_MOBILE;
                 break;
-            case "Visual Mobile":
+            case "VISUAL_MOBILE":
                 typeSwitch = ItemType.VISUAL_MOBILE;
                 break;
             default:
