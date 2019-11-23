@@ -1,11 +1,11 @@
-/**
- * @file MonitorType.java
- * @breif Establishes possible monitor types for visual products.
- * @Author Shane Broxson
- */
 package GUIProject;
 
+/**
+ * Establishes possible monitor types for visual products.
+ * @file MonitorType.java
+ * @author Shane Broxson
+ */
 public enum MonitorType {
-    LCD,
-    LED
+  LCD,
+  LED
 }

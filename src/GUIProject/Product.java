@@ -1,90 +1,121 @@
-/**
- * @file Product.java
- * @breif File to initialize Product.
- * @Author Shane Broxson
- */
 package GUIProject;
 
+/**
+ * Class to create objects of Product that implements Item.
+ *
+ * @file Product.java
+ * @author Shane Broxson
+ */
 public class Product implements Item {
-    private int id;
-    private String name;
-    private String type;
-    private ItemType types;
-    private String manufacturer;
-    private String abr;
+  private int id;
+  private String name;
+  private String type;
+  private ItemType types;
+  private String manufacturer;
+  private String abr;
 
-    Product(int i, String n, String t, String m) {
-        id = i;
-        name = n;
-        type = t;
-        manufacturer = m;
-    }
+  /**
+   * @param i integer id
+   * @param n string name
+   * @param t string item type
+   * @param m string manufacturer
+   */
+  Product(int i, String n, String t, String m) {
+    id = i;
+    name = n;
+    type = t;
+    manufacturer = m;
+  }
 
-    Product(String n, String m, ItemType t) {
-        name = n;
-        manufacturer = m;
-        types = t;
-    }
+  /**
+   * @param n string name
+   * @param m string manufacturer
+   * @param t ItemType type
+   */
+  Product(String n, String m, ItemType t) {
+    name = n;
+    manufacturer = m;
+    types = t;
+  }
 
-    public String toString() {
-        return "Name: " + name + "\nManufacturer: " + manufacturer + "\nType: " + type;
-    }
+  /** @return An override to toString method */
+  public String toString() {
+    return "Name: " + name + "\nManufacturer: " + manufacturer + "\nType: " + type;
+  }
 
-    public int getId() {
-        return id;
-    }
+  /** @return Product ID */
+  public int getId() {
+    return id;
+  }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  /** @param id Sets Product ID */
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public String getName() {
-        return name;
-    }
+  /** @return Product Name */
+  public String getName() {
+    return name;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  /** @param name Sets Product Name */
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public String getManufacturer() {
-        return manufacturer;
-    }
+  /** @return Product Manufacturer */
+  public String getManufacturer() {
+    return manufacturer;
+  }
 
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
-    }
+  /** @param manufacturer Sets Product Manufacturer */
+  public void setManufacturer(String manufacturer) {
+    this.manufacturer = manufacturer;
+  }
 
-    public String getType() {
-        return type;
-    }
+  /** @return Product Type */
+  public String getType() {
+    return type;
+  }
 
-    public void setType(String type) {
-        this.type = type;
-    }
+  /** @param type Sets Product Type */
+  public void setType(String type) {
+    this.type = type;
+  }
 
-    public ItemType getTypes(){
-        return types;
-    }
+  /** @return Product Types */
+  public ItemType getTypes() {
+    return types;
+  }
 
-    public void setTypes(ItemType types){
-        this.types = types;
-    }
+  /** @param types Sets Product Types (custom datatype) */
+  public void setTypes(ItemType types) {
+    this.types = types;
+  }
 
-    public String getAbr(){
-        return abr;
-    }
+  /** @return abbreviated ItemType */
+  public String getAbr() {
+    return abr;
+  }
 
-    public void setAbr(String abr){
-        this.abr = abr;
-    }
+  /** @param abr Sets abbreviated ItemType */
+  public void setAbr(String abr) {
+    this.abr = abr;
+  }
 }
 
+/**
+ * Subclass to extend Product
+ *
+ * @file Product.java
+ * @author Shane Broxson
+ */
 class Widget extends Product {
-    Widget(int i, String n, String t, String m) {
-        super(i, n, t, m);
-    }
+  Widget(int i, String n, String t, String m) {
+    super(i, n, t, m);
+  }
 
-    Widget(String n, String m, ItemType t) {
-        super(n, m, t);
-    }
+  Widget(String n, String m, ItemType t) {
+    super(n, m, t);
+  }
 }

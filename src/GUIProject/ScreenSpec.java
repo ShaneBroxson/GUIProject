@@ -1,12 +1,15 @@
-/**
- * @file ScreenSpec.java
- * @breif Interface for Screen (MoviePlayer).
- * @Author Shane Broxson
- */
 package GUIProject;
 
+/**
+ * Interface for Screen (MoviePlayer).
+ *
+ * @file ScreenSpec.java
+ * @author Shane Broxson
+ */
 public interface ScreenSpec {
-    public String getResolution();
-    public int getRefreshRate();
-    public int getResponseTime();
+  public String getResolution();
+
+  public int getRefreshRate();
+
+  public int getResponseTime();
 }

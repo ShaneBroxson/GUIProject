@@ -1,13 +1,17 @@
-/**
- * @file MultimediaControl.java
- * @breif Establishes functions for Movie & Audio Players.
- * @Author Shane Broxson
- */
 package GUIProject;
 
+/**
+ * Establishes functions for Movie % Audio Players.
+ *
+ * @file MultimediaControl.java
+ * @author Shane Broxson
+ */
 public interface MultimediaControl {
-    void play();
-    void stop();
-    void previous();
-    void next();
+  void play();
+
+  void stop();
+
+  void previous();
+
+  void next();
 }
