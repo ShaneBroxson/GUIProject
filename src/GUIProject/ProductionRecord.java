@@ -23,12 +23,15 @@ public class ProductionRecord {
     currentDate = new Date();
   }
 
-  /** @param W object Product */
-  ProductionRecord(Product W) {
+  /**
+   * @param W Object Product
+   * @param produced Number of each based on ItemType used to generate Serial Number
+   */
+  ProductionRecord(Product W, int produced) {
     this.prodID = W.getId();
     // create a better counting system for serial num
     String manUpdate = W.getManufacturer().replaceAll(" ", "_").toUpperCase().substring(0, 3);
-    serialNum = manUpdate + W.getTypes().item_type_abr + String.format("%05d", produced++);
+    serialNum = manUpdate + W.getTypes().item_type_abr + String.format("%05d", produced);
     currentDate = new Date();
   }
 

@@ -193,13 +193,21 @@ public class Controller {
     // gets value from combobox
     String quantityString = String.valueOf(quantity_comboBox.getValue());
     int quantity = Integer.parseInt(quantityString);
-
-    int itemCount = 0; // create better counter
+    // Initiates count for Serial Number
+    int itemCount = 0;
     for (int i = 0; i < quantity; i++) {
       ObservableList<ProductionRecord> productionRecord = productionLog.getItems();
+      for (ProductionRecord record : productionRecord) {
+        assert typeSwitch != null;
+        String comparison = record.getSerialNum().substring(3, 5);
+        if (typeSwitch.item_type_abr.equals(comparison)) {
+          itemCount++;
+        }
+      }
       int prodNum = productionRecord.size();
       // ProductionRecord prodRec = new ProductionRecord(testing, itemCount++);
-      ProductionRecord prodRec = new ProductionRecord(productProduced);
+      //Check Product productProduced to find number of ItemType
+      ProductionRecord prodRec = new ProductionRecord(productProduced, itemCount);
       System.out.println(prodRec.getSerialNum());
       try {
         Timestamp ts = new Timestamp(prodRec.getProdDate().getTime());
