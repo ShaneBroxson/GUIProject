@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.sql.*;
 
@@ -25,18 +24,12 @@ public class LoginPage {
 
     @FXML
     private TextField userName;
-
     @FXML
     private PasswordField passWord;
-
-    @FXML
-    private Button login_button;
-
     @FXML
     private Label failedLogin;
     private final String JDBC_DRIVER = "org.h2.Driver";
     private final String DB_URL = "jdbc:h2:./res/GUI_DB";
-
     private Connection conn = null;
     private Statement stmt = null;
 

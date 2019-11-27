@@ -22,38 +22,32 @@ public class Controller {
   @FXML private TextField product_name_input;
   @FXML private ChoiceBox<String> item_type_ChoiceBox;
   @FXML private TableView<Product> products_table;
-  @FXML
-  private Tab manager_tab;
-  @FXML
-  private Button manager_access_btn;
-  @FXML
-  private Label not_manager;
-  @FXML
-  private TableView<EmployeeInfo> employee_table;
-  @FXML
-  private TextField full_name;
-  @FXML
-  private PasswordField new_pass;
-  @FXML
-  private Button add_account;
-  @FXML
-  private Label gen_user;
-  @FXML
-  private Label gen_email;
-  @FXML
-  private Label generated_username;
-  @FXML
-  private Label generated_email;
-  @FXML
-  private CheckBox manager_account;
-  @FXML
-  private Label incorrect_format;
-  @FXML
-  private Label add_product_error;
-  @FXML
-  private Label record_production_error;
-  public static String userName;
-  public static Boolean isManagement;
+    @FXML
+    private Tab manager_tab;
+    @FXML
+    private Label not_manager;
+    @FXML
+    private TableView<EmployeeInfo> employee_table;
+    @FXML
+    private TextField full_name;
+    @FXML
+    private PasswordField new_pass;
+    @FXML
+    private Label gen_user;
+    @FXML
+    private Label gen_email;
+    @FXML
+    private Label generated_username;
+    @FXML
+    private Label generated_email;
+    @FXML
+    private CheckBox manager_account;
+    @FXML
+    private Label incorrect_format;
+    @FXML
+    private Label add_product_error;
+    @FXML
+    private Label record_production_error;
   public static LoggedEmployee log_emp;
   private final String JDBC_DRIVER = "org.h2.Driver";
   private final String DB_URL = "jdbc:h2:./res/GUI_DB";
@@ -141,7 +135,9 @@ public class Controller {
       col_currentDate.setCellValueFactory(new PropertyValueFactory<>("ProdDate"));
       TableColumn<ProductionRecord, String> col_emp = new TableColumn<>("Employee");
       col_emp.setCellValueFactory(new PropertyValueFactory<>("employee"));
-      productionLog.getColumns().addAll(col_prodNum, col_prodID, col_serialNum, col_currentDate, col_emp);
+        productionLog
+                .getColumns()
+                .addAll(col_prodNum, col_prodID, col_serialNum, col_currentDate, col_emp);
 
       // Create Table Columns for Employees In Management tab of GUI
       TableColumn<EmployeeInfo, String> col_uname = new TableColumn<>("Employee Name");
@@ -168,7 +164,8 @@ public class Controller {
       rs = stmt.executeQuery("SELECT * FROM PRODUCTIONRECORD");
       while (rs.next()) {
         productionRecord.add(
-                new ProductionRecord(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getTimestamp(4), rs.getString(5)));
+                new ProductionRecord(
+                        rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getTimestamp(4), rs.getString(5)));
       }
 
       stmt = conn.createStatement();
@@ -437,7 +434,8 @@ public class Controller {
           while (rs.next()) {
             if (rs.last()) {
               productionRecord.add(
-                      new ProductionRecord(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getDate(4), rs.getString(5)));
+                      new ProductionRecord(
+                              rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getDate(4), rs.getString(5)));
             }
           }
         } catch (SQLException ex) {
