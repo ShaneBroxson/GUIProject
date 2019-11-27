@@ -14,6 +14,7 @@ public class ProductionRecord {
   private int prodID;
   private String serialNum;
   private Date currentDate;
+  private String employee;
 
   /** @param pn Production Number */
   ProductionRecord(int pn) {
@@ -41,11 +42,12 @@ public class ProductionRecord {
    * @param serialNum Product Serial Number
    * @param currentDate Product Current Date
    */
-  ProductionRecord(int prodNum, int prodID, String serialNum, Date currentDate) {
+  ProductionRecord(int prodNum, int prodID, String serialNum, Date currentDate, String employee) {
     this.prodNum = prodNum;
     this.prodID = prodID;
     this.serialNum = serialNum;
     this.currentDate = currentDate;
+    this.employee = employee;
   }
 
   /** @return override to toString method for ProductionRecord */
@@ -98,5 +100,19 @@ public class ProductionRecord {
   /** @return Product Current Date */
   public Date getProdDate() {
     return currentDate;
+  }
+
+  /**
+   * @return Logged in Employee
+   */
+  public String getEmployee() {
+    return employee;
+  }
+
+  /**
+   * @param employee Logged in Employee Username
+   */
+  public void setEmployee(String employee) {
+    this.employee = employee;
   }
 }

@@ -48,6 +48,10 @@ public class Controller {
   private CheckBox manager_account;
   @FXML
   private Label incorrect_format;
+  @FXML
+  private Label add_product_error;
+  @FXML
+  private Label record_production_error;
   public static String userName;
   public static Boolean isManagement;
   public static LoggedEmployee log_emp;
@@ -65,6 +69,8 @@ public class Controller {
     manager_tab.setDisable(true);
     not_manager.setVisible(false);
     incorrect_format.setVisible(false);
+    add_product_error.setVisible(false);
+    record_production_error.setVisible(false);
     // Populates quantity_comboBox in the produce tab of GUI.
     for (int i = 1; i <= 10; i++) {
       quantity_comboBox.getItems().add(i);
@@ -133,7 +139,9 @@ public class Controller {
       col_serialNum.setCellValueFactory(new PropertyValueFactory<>("SerialNum"));
       TableColumn<ProductionRecord, Timestamp> col_currentDate = new TableColumn<>("Date Produced");
       col_currentDate.setCellValueFactory(new PropertyValueFactory<>("ProdDate"));
-      productionLog.getColumns().addAll(col_prodNum, col_prodID, col_serialNum, col_currentDate);
+      TableColumn<ProductionRecord, String> col_emp = new TableColumn<>("Employee");
+      col_emp.setCellValueFactory(new PropertyValueFactory<>("employee"));
+      productionLog.getColumns().addAll(col_prodNum, col_prodID, col_serialNum, col_currentDate, col_emp);
 
       // Create Table Columns for Employees In Management tab of GUI
       TableColumn<EmployeeInfo, String> col_uname = new TableColumn<>("Employee Name");
@@ -160,7 +168,7 @@ public class Controller {
       rs = stmt.executeQuery("SELECT * FROM PRODUCTIONRECORD");
       while (rs.next()) {
         productionRecord.add(
-            new ProductionRecord(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getTimestamp(4)));
+                new ProductionRecord(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getTimestamp(4), rs.getString(5)));
       }
 
       stmt = conn.createStatement();
@@ -279,7 +287,7 @@ public class Controller {
   }
 
   /**
-   * @param user_name     Logged in Users Username
+   * @param user_name Logged in Users Username
    * @param is_Management Determines if Logged In user is Management
    */
   void sendUserInfo(String user_name, Boolean is_Management) {
@@ -299,46 +307,50 @@ public class Controller {
     String man_input = manufacturer_input.getText();
     String prod_name_input = product_name_input.getText();
     String item_type = item_type_ChoiceBox.getValue();
-
-    try {
-      String sql =
-          "INSERT INTO PRODUCT (NAME, TYPE , MANUFACTURER) VALUES ('"
-              + prod_name_input
-              + "', '"
-              + item_type
-              + "', '"
-              + man_input
-              + "')";
+    if (man_input == null || prod_name_input == null || item_type == null) {
+      add_product_error.setVisible(true);
+    } else {
+      add_product_error.setVisible(false);
       try {
-        stmt.execute(sql);
-      } catch (SQLException e) {
+        String sql =
+                "INSERT INTO PRODUCT (NAME, TYPE , MANUFACTURER) VALUES ('"
+                        + prod_name_input
+                        + "', '"
+                        + item_type
+                        + "', '"
+                        + man_input
+                        + "')";
+        try {
+          stmt.execute(sql);
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      } catch (NullPointerException ex) {
+        ex.printStackTrace();
+      }
+      try {
+        Class.forName(JDBC_DRIVER);
+      } catch (ClassNotFoundException e) {
         e.printStackTrace();
       }
-    } catch (NullPointerException ex) {
-      ex.printStackTrace();
-    }
-    try {
-      Class.forName(JDBC_DRIVER);
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
-    }
-    try {
-      conn = DriverManager.getConnection(DB_URL);
-      stmt = conn.createStatement();
-      ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCT");
+      try {
+        conn = DriverManager.getConnection(DB_URL);
+        stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCT");
 
-      while (rs.next()) {
-        if (rs.last()) {
-          ObservableList<Product> prodTableList2 = products_table.getItems();
-          ObservableList<Product> prodTableList = productChoice.getItems();
-          prodTableList.add(
-              new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
-          prodTableList2.add(
-              new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+        while (rs.next()) {
+          if (rs.last()) {
+            ObservableList<Product> prodTableList2 = products_table.getItems();
+            ObservableList<Product> prodTableList = productChoice.getItems();
+            prodTableList.add(
+                    new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+            prodTableList2.add(
+                    new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+          }
         }
+      } catch (SQLException ex) {
+        ex.printStackTrace();
       }
-    } catch (SQLException ex) {
-      ex.printStackTrace();
     }
   }
 
@@ -366,65 +378,71 @@ public class Controller {
         System.out.println("Invalid String - Unable to Define ItemType");
     }
     Product productProduced = new Widget(testing.getName(), testing.getManufacturer(), typeSwitch);
-
-    // gets value from combobox
-    String quantityString = String.valueOf(quantity_comboBox.getValue());
-    int quantity = Integer.parseInt(quantityString);
-    // Initiates count for Serial Number
-    for (int i = 0; i < quantity; i++) {
-      int itemCount = 0;
-      ObservableList<ProductionRecord> productionRecord = productionLog.getItems();
-      for (ProductionRecord record : productionRecord) {
-        assert typeSwitch != null;
-        String comparison = record.getSerialNum().substring(3, 5);
-        if (typeSwitch.item_type_abr.equals(comparison)) {
-          itemCount++;
-        }
-      }
-      int prodNum = productionRecord.size();
-      // ProductionRecord prodRec = new ProductionRecord(testing, itemCount++);
-      // Check Product productProduced to find number of ItemType
-      ProductionRecord prodRec = new ProductionRecord(productProduced, itemCount);
-      System.out.println(prodRec.getSerialNum());
-      try {
-        Timestamp ts = new Timestamp(prodRec.getProdDate().getTime());
-        String sql =
-                "INSERT INTO PRODUCTIONRECORD (PRODUCTION_NUM, PRODUCT_ID , SERIAL_NUM, DATE_PRODUCED) VALUES ('"
-                        + prodNum
-                        + "', '"
-                        + testing.getId()
-                        + "', '"
-                        + prodRec.getSerialNum()
-                        + "', '"
-                        + ts
-                        + "')";
-        // Test Case
-        System.out.println("THE SQL STATEMNT: " + sql);
-        try {
-          stmt.execute(sql);
-        } catch (SQLException e) {
-          e.printStackTrace();
-        }
-      } catch (NullPointerException ex) {
-        ex.printStackTrace();
-      }
-      try {
-        Class.forName(JDBC_DRIVER);
-      } catch (ClassNotFoundException e) {
-        e.printStackTrace();
-      }
-      try {
-        conn = DriverManager.getConnection(DB_URL);
-        stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCTIONRECORD");
-        while (rs.next()) {
-          if (rs.last()) {
-            productionRecord.add(
-                    new ProductionRecord(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getDate(4)));
+    if (quantity_comboBox.getValue() == null) {
+      record_production_error.setVisible(true);
+    } else {
+      record_production_error.setVisible(false);
+      // gets value from combobox
+      String quantityString = String.valueOf(quantity_comboBox.getValue());
+      int quantity = Integer.parseInt(quantityString);
+      // Initiates count for Serial Number
+      for (int i = 0; i < quantity; i++) {
+        int itemCount = 0;
+        ObservableList<ProductionRecord> productionRecord = productionLog.getItems();
+        for (ProductionRecord record : productionRecord) {
+          assert typeSwitch != null;
+          String comparison = record.getSerialNum().substring(3, 5);
+          if (typeSwitch.item_type_abr.equals(comparison)) {
+            itemCount++;
           }
         }
-      } catch (SQLException ex) {
-        ex.printStackTrace();
+        int prodNum = productionRecord.size();
+        // ProductionRecord prodRec = new ProductionRecord(testing, itemCount++);
+        // Check Product productProduced to find number of ItemType
+        ProductionRecord prodRec = new ProductionRecord(productProduced, itemCount);
+        System.out.println(prodRec.getSerialNum());
+        try {
+          Timestamp ts = new Timestamp(prodRec.getProdDate().getTime());
+          String sql =
+                  "INSERT INTO PRODUCTIONRECORD (PRODUCTION_NUM, PRODUCT_ID , SERIAL_NUM, DATE_PRODUCED, RECORDED_EMPLOYEE) VALUES ('"
+                          + prodNum
+                          + "', '"
+                          + testing.getId()
+                          + "', '"
+                          + prodRec.getSerialNum()
+                          + "', '"
+                          + ts
+                          + "', '"
+                          + log_emp.getUserName()
+                          + "')";
+          // Test Case
+          System.out.println("THE SQL STATEMNT: " + sql);
+          try {
+            stmt.execute(sql);
+          } catch (SQLException e) {
+            e.printStackTrace();
+          }
+        } catch (NullPointerException ex) {
+          ex.printStackTrace();
+        }
+        try {
+          Class.forName(JDBC_DRIVER);
+        } catch (ClassNotFoundException e) {
+          e.printStackTrace();
+        }
+        try {
+          conn = DriverManager.getConnection(DB_URL);
+          stmt = conn.createStatement();
+          ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCTIONRECORD");
+          while (rs.next()) {
+            if (rs.last()) {
+              productionRecord.add(
+                      new ProductionRecord(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getDate(4), rs.getString(5)));
+            }
+          }
+        } catch (SQLException ex) {
+          ex.printStackTrace();
+        }
       }
     }
   }
