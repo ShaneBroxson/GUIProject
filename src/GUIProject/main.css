@@ -20,6 +20,18 @@
 
 .choice-box {
     -fx-text-fill: black;
+    -fx-marker-color: #61a2b1;
+    -fx-text-color: black;
+    -fx-background-color: white;
+}
+
+.choice-box .menu-item > .label {
+    -fx-text-fill: black;
+    -fx-font-weight: normal
+}
+
+.choice-box > .label {
+    -fx-text-fill: black;
 }
 
 .check-box {
