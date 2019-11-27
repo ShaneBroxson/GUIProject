@@ -1,5 +1,7 @@
 package GUIProject;
+
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -20,6 +22,35 @@ public class Controller {
   @FXML private TextField product_name_input;
   @FXML private ChoiceBox<String> item_type_ChoiceBox;
   @FXML private TableView<Product> products_table;
+  @FXML
+  private Tab manager_tab;
+  @FXML
+  private Button manager_access_btn;
+  @FXML
+  private Label not_manager;
+  @FXML
+  private TableView<EmployeeInfo> employee_table;
+  @FXML
+  private TextField full_name;
+  @FXML
+  private PasswordField new_pass;
+  @FXML
+  private Button add_account;
+  @FXML
+  private Label gen_user;
+  @FXML
+  private Label gen_email;
+  @FXML
+  private Label generated_username;
+  @FXML
+  private Label generated_email;
+  @FXML
+  private CheckBox manager_account;
+  @FXML
+  private Label incorrect_format;
+  public static String userName;
+  public static Boolean isManagement;
+  public static LoggedEmployee log_emp;
   private final String JDBC_DRIVER = "org.h2.Driver";
   private final String DB_URL = "jdbc:h2:./res/GUI_DB";
 
@@ -27,7 +58,13 @@ public class Controller {
   private Statement stmt = null;
 
   public void initialize() {
-
+    gen_user.setVisible(false);
+    gen_email.setVisible(false);
+    generated_username.setVisible(false);
+    generated_email.setVisible(false);
+    manager_tab.setDisable(true);
+    not_manager.setVisible(false);
+    incorrect_format.setVisible(false);
     // Populates quantity_comboBox in the produce tab of GUI.
     for (int i = 1; i <= 10; i++) {
       quantity_comboBox.getItems().add(i);
@@ -44,6 +81,7 @@ public class Controller {
     ObservableList<Product> prodTableList = productChoice.getItems();
     ObservableList<Product> prodTableList2 = products_table.getItems();
     ObservableList<ProductionRecord> productionRecord = productionLog.getItems();
+    ObservableList<EmployeeInfo> employeeList = employee_table.getItems();
 
     // Connect to Database
     try {
@@ -97,6 +135,17 @@ public class Controller {
       col_currentDate.setCellValueFactory(new PropertyValueFactory<>("ProdDate"));
       productionLog.getColumns().addAll(col_prodNum, col_prodID, col_serialNum, col_currentDate);
 
+      // Create Table Columns for Employees In Management tab of GUI
+      TableColumn<EmployeeInfo, String> col_uname = new TableColumn<>("Employee Name");
+      col_uname.setCellValueFactory(new PropertyValueFactory<>("name"));
+      TableColumn<EmployeeInfo, String> col_username = new TableColumn<>("Username");
+      col_username.setCellValueFactory(new PropertyValueFactory<>("username"));
+      TableColumn<EmployeeInfo, String> col_email = new TableColumn<>("Email");
+      col_email.setCellValueFactory(new PropertyValueFactory<>("email"));
+      TableColumn<EmployeeInfo, Boolean> col_isManagement = new TableColumn<>("Manager");
+      col_isManagement.setCellValueFactory(new PropertyValueFactory<>("management"));
+      employee_table.getColumns().addAll(col_uname, col_username, col_email, col_isManagement);
+
       stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCT");
       while (rs.next()) {
@@ -113,8 +162,136 @@ public class Controller {
         productionRecord.add(
             new ProductionRecord(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getTimestamp(4)));
       }
+
+      stmt = conn.createStatement();
+      rs = stmt.executeQuery("SELECT NAME, USERNAME , EMAIL , MANAGEMENT FROM EMPLOYEE");
+      while (rs.next()) {
+        //        System.out.println(rs.getString(1));
+        employeeList.add(
+                new EmployeeInfo(rs.getString(1), rs.getString(2), rs.getString(3), rs.getBoolean(4)));
+      }
     } catch (SQLException ex) {
       ex.printStackTrace();
+    }
+  }
+
+  @FXML
+  void generated_info(ActionEvent event) {
+    String f_name = full_name.getText();
+    String p_word = new_pass.getText();
+    Boolean manager = manager_account.isSelected();
+    Employee employee = new Employee(f_name, p_word, manager);
+    if (employee.getUsername().equals("default") || employee.getPassword().equals("pw")) {
+      incorrect_format.setVisible(true);
+      gen_email.setVisible(false);
+      generated_email.setVisible(false);
+      gen_user.setVisible(false);
+      generated_username.setVisible(false);
+    } else {
+      incorrect_format.setVisible(false);
+      generated_username.setText(employee.getUsername());
+      generated_username.setVisible(true);
+      gen_user.setVisible(true);
+      generated_email.setText(employee.getEmail());
+      generated_email.setVisible(true);
+      gen_email.setVisible(true);
+      String usernameCheck = employee.getUsername();
+      int nameCount = 0;
+      try {
+        Class.forName(JDBC_DRIVER);
+      } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+      }
+      try {
+        conn = DriverManager.getConnection(DB_URL);
+        stmt = conn.createStatement();
+        ResultSet rs =
+                stmt.executeQuery("SELECT NAME, USERNAME , EMAIL , MANAGEMENT FROM EMPLOYEE");
+        while (rs.next()) {
+          if (rs.getString(2).contains(usernameCheck)) {
+            nameCount += 1;
+          }
+        }
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+      try {
+        String user_n = employee.getUsername();
+        if (nameCount != 0) {
+          user_n += Integer.toString(nameCount);
+        }
+        String tempPass = employee.getPassword();
+        String sql =
+                "INSERT INTO EMPLOYEE (NAME, USERNAME , EMAIL , PASSWORD , MANAGEMENT) VALUES ('"
+                        + employee.getName()
+                        + "', '"
+                        + user_n
+                        + "', '"
+                        + employee.getEmail()
+                        + "', '"
+                        + reverseString(tempPass)
+                        + "', '"
+                        + employee.getManagement()
+                        + "');";
+        try {
+          stmt.execute(sql);
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      } catch (NullPointerException ex) {
+        ex.printStackTrace();
+      }
+      try {
+        Class.forName(JDBC_DRIVER);
+      } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+      }
+      try {
+        conn = DriverManager.getConnection(DB_URL);
+        stmt = conn.createStatement();
+        ResultSet rs =
+                stmt.executeQuery("SELECT NAME, USERNAME , EMAIL , MANAGEMENT FROM EMPLOYEE");
+        while (rs.next()) {
+          if (rs.last()) {
+            ObservableList<EmployeeInfo> employeeList = employee_table.getItems();
+            employeeList.add(
+                    new EmployeeInfo(
+                            rs.getString(1), rs.getString(2), rs.getString(3), rs.getBoolean(4)));
+          }
+        }
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  /**
+   * @param id Inputted Password
+   * @return Encrypted Password
+   */
+  private static String reverseString(String id) {
+    if (id.isEmpty()) {
+      System.out.println("String is Empty");
+      return id;
+    }
+    // Calling Function Recursively
+    return reverseString(id.substring(1)) + id.charAt(0);
+  }
+
+  /**
+   * @param user_name     Logged in Users Username
+   * @param is_Management Determines if Logged In user is Management
+   */
+  void sendUserInfo(String user_name, Boolean is_Management) {
+    log_emp = new LoggedEmployee(user_name, is_Management);
+  }
+
+  @FXML
+  void managementAccess(ActionEvent event) {
+    if (log_emp.getManagement()) {
+      manager_tab.setDisable(false);
+    } else {
+      not_manager.setVisible(true);
     }
   }
 
@@ -194,8 +371,8 @@ public class Controller {
     String quantityString = String.valueOf(quantity_comboBox.getValue());
     int quantity = Integer.parseInt(quantityString);
     // Initiates count for Serial Number
-    int itemCount = 0;
     for (int i = 0; i < quantity; i++) {
+      int itemCount = 0;
       ObservableList<ProductionRecord> productionRecord = productionLog.getItems();
       for (ProductionRecord record : productionRecord) {
         assert typeSwitch != null;
@@ -206,21 +383,21 @@ public class Controller {
       }
       int prodNum = productionRecord.size();
       // ProductionRecord prodRec = new ProductionRecord(testing, itemCount++);
-      //Check Product productProduced to find number of ItemType
+      // Check Product productProduced to find number of ItemType
       ProductionRecord prodRec = new ProductionRecord(productProduced, itemCount);
       System.out.println(prodRec.getSerialNum());
       try {
         Timestamp ts = new Timestamp(prodRec.getProdDate().getTime());
         String sql =
-            "INSERT INTO PRODUCTIONRECORD (PRODUCTION_NUM, PRODUCT_ID , SERIAL_NUM, DATE_PRODUCED) VALUES ('"
-                + prodNum
-                + "', '"
-                + testing.getId()
-                + "', '"
-                + prodRec.getSerialNum()
-                + "', '"
-                + ts
-                + "')";
+                "INSERT INTO PRODUCTIONRECORD (PRODUCTION_NUM, PRODUCT_ID , SERIAL_NUM, DATE_PRODUCED) VALUES ('"
+                        + prodNum
+                        + "', '"
+                        + testing.getId()
+                        + "', '"
+                        + prodRec.getSerialNum()
+                        + "', '"
+                        + ts
+                        + "')";
         // Test Case
         System.out.println("THE SQL STATEMNT: " + sql);
         try {
@@ -243,7 +420,7 @@ public class Controller {
         while (rs.next()) {
           if (rs.last()) {
             productionRecord.add(
-                new ProductionRecord(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getDate(4)));
+                    new ProductionRecord(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getDate(4)));
           }
         }
       } catch (SQLException ex) {

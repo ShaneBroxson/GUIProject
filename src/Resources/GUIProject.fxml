@@ -2,9 +2,11 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableView?>
@@ -13,6 +15,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIProject.Controller">
   <tabs>
@@ -25,6 +28,9 @@
                   <Label layoutX="636.0" layoutY="207.0" text="Choose Quantitiy" />
                   <ComboBox fx:id="quantity_comboBox" layoutX="607.0" layoutY="242.0" prefWidth="150.0" />
                   <Button fx:id="btn_record_production" layoutX="625.0" layoutY="284.0" mnemonicParsing="false" onAction="#record_prod" text="Record Production" />
+                   <Button fx:id="manager_access_btn" layoutX="716.0" layoutY="14.0" mnemonicParsing="false"
+                           onAction="#managementAccess" text="Manager Access"/>
+                   <Label fx:id="not_manager" layoutX="652.0" layoutY="39.0" text="Account Signed in is not a Manager"/>
                </children></AnchorPane>
       </content>
     </Tab>
@@ -66,8 +72,42 @@
             </AnchorPane>
         </content>
       </Tab>
+      <Tab fx:id="manager_tab" text="Management">
+          <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                      <TableView fx:id="employee_table" layoutX="455.0" layoutY="113.0" prefHeight="325.0"
+                                 prefWidth="439.0"/>
+                      <Label layoutX="608.0" layoutY="85.0" text="Current Employees"/>
+                      <Label layoutX="112.0" layoutY="85.0" text="Create New Employee Account"/>
+                      <Label layoutX="45.0" layoutY="130.0" text="First and Last Name:"/>
+                      <Label layoutX="45.0" layoutY="175.0" text="Password:"/>
+                      <TextField fx:id="full_name" layoutX="214.0" layoutY="128.0"/>
+                      <PasswordField fx:id="new_pass" layoutX="214.0" layoutY="172.0"/>
+                      <Label layoutX="21.0" layoutY="204.0" prefHeight="20.0" prefWidth="441.0"
+                             text="*Must contain an uppercase, a lowercase, and a special character*"/>
+                      <Button fx:id="add_account" layoutX="157.0" layoutY="319.0" mnemonicParsing="false"
+                              onAction="#generated_info" text="Add Account"/>
+                      <Label fx:id="gen_user" layoutX="45.0" layoutY="387.0" text="Generated Username:"/>
+                      <Label fx:id="gen_email" layoutX="45.0" layoutY="418.0" text="Generated Email:"/>
+                      <Label fx:id="generated_username" layoutX="209.0" layoutY="387.0" prefHeight="20.0"
+                             prefWidth="151.0" text="(Generated Username)"/>
+                      <Label fx:id="generated_email" layoutX="208.0" layoutY="418.0" prefHeight="20.0" prefWidth="153.0"
+                             text="(Generated Email)"/>
+                      <CheckBox fx:id="manager_account" layoutX="214.0" layoutY="224.0" mnemonicParsing="false"
+                                prefHeight="33.0" prefWidth="163.0" text="Manager Account" textFill="#f933ff">
+                          <font>
+                              <Font size="16.0"/>
+                          </font>
+                      </CheckBox>
+                      <Label fx:id="incorrect_format" layoutX="71.0" layoutY="286.0"
+                             text="Format of Name (First name Last name)"/>
+                  </children>
+              </AnchorPane>
+          </content>
+      </Tab>
   </tabs>
     <stylesheets>
-        <URL value="@main.css" />
+        <URL value="@../GUIProject/main.css"/>
     </stylesheets>
 </TabPane>
