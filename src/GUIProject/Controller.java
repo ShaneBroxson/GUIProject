@@ -375,7 +375,7 @@ public class Controller {
         System.out.println("Invalid String - Unable to Define ItemType");
     }
     Product productProduced = new Widget(testing.getName(), testing.getManufacturer(), typeSwitch);
-    if (quantity_comboBox.getValue() == null) {
+    if (quantity_comboBox.getValue() == null || String.valueOf(quantity_comboBox.getValue()).equals("")) {
       record_production_error.setVisible(true);
     } else {
       record_production_error.setVisible(false);
