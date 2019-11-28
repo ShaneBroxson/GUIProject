@@ -22,32 +22,32 @@ public class Controller {
   @FXML private TextField product_name_input;
   @FXML private ChoiceBox<String> item_type_ChoiceBox;
   @FXML private TableView<Product> products_table;
-  @FXML
-  private Tab manager_tab;
-  @FXML
-  private Label not_manager;
-  @FXML
-  private TableView<EmployeeInfo> employee_table;
-  @FXML
-  private TextField full_name;
-  @FXML
-  private PasswordField new_pass;
-  @FXML
-  private Label gen_user;
-  @FXML
-  private Label gen_email;
-  @FXML
-  private Label generated_username;
-  @FXML
-  private Label generated_email;
-  @FXML
-  private CheckBox manager_account;
-  @FXML
-  private Label incorrect_format;
-  @FXML
-  private Label add_product_error;
-  @FXML
-  private Label record_production_error;
+    @FXML
+    private Tab manager_tab;
+    @FXML
+    private Label not_manager;
+    @FXML
+    private TableView<EmployeeInfo> employee_table;
+    @FXML
+    private TextField full_name;
+    @FXML
+    private PasswordField new_pass;
+    @FXML
+    private Label gen_user;
+    @FXML
+    private Label gen_email;
+    @FXML
+    private Label generated_username;
+    @FXML
+    private Label generated_email;
+    @FXML
+    private CheckBox manager_account;
+    @FXML
+    private Label incorrect_format;
+    @FXML
+    private Label add_product_error;
+    @FXML
+    private Label record_production_error;
   public static LoggedEmployee log_emp;
   private final String JDBC_DRIVER = "org.h2.Driver";
   private final String DB_URL = "jdbc:h2:./res/GUI_DB";
@@ -375,7 +375,8 @@ public class Controller {
         System.out.println("Invalid String - Unable to Define ItemType");
     }
     Product productProduced = new Widget(testing.getName(), testing.getManufacturer(), typeSwitch);
-    if (quantity_comboBox.getValue() == null || String.valueOf(quantity_comboBox.getValue()).equals("")) {
+      if (quantity_comboBox.getValue() == null
+              || String.valueOf(quantity_comboBox.getValue()).equals("")) {
       record_production_error.setVisible(true);
     } else {
       record_production_error.setVisible(false);
