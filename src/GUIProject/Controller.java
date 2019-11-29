@@ -22,32 +22,36 @@ public class Controller {
   @FXML private TextField product_name_input;
   @FXML private ChoiceBox<String> item_type_ChoiceBox;
   @FXML private TableView<Product> products_table;
-    @FXML
-    private Tab manager_tab;
-    @FXML
-    private Label not_manager;
-    @FXML
-    private TableView<EmployeeInfo> employee_table;
-    @FXML
-    private TextField full_name;
-    @FXML
-    private PasswordField new_pass;
-    @FXML
-    private Label gen_user;
-    @FXML
-    private Label gen_email;
-    @FXML
-    private Label generated_username;
-    @FXML
-    private Label generated_email;
-    @FXML
-    private CheckBox manager_account;
-    @FXML
-    private Label incorrect_format;
-    @FXML
-    private Label add_product_error;
-    @FXML
-    private Label record_production_error;
+  @FXML
+  private Tab manager_tab;
+  @FXML
+  private Label not_manager;
+  @FXML
+  private TableView<EmployeeInfo> employee_table;
+  @FXML
+  private TextField full_name;
+  @FXML
+  private PasswordField new_pass;
+  @FXML
+  private Label gen_user;
+  @FXML
+  private Label gen_email;
+  @FXML
+  private Label generated_username;
+  @FXML
+  private Label generated_email;
+  @FXML
+  private CheckBox manager_account;
+  @FXML
+  private Label incorrect_format;
+  @FXML
+  private Label add_product_error;
+  @FXML
+  private Label record_production_error;
+  @FXML
+  private Label production_recorded;
+  @FXML
+  private Label add_product_success;
   public static LoggedEmployee log_emp;
   private final String JDBC_DRIVER = "org.h2.Driver";
   private final String DB_URL = "jdbc:h2:./res/GUI_DB";
@@ -65,6 +69,8 @@ public class Controller {
     incorrect_format.setVisible(false);
     add_product_error.setVisible(false);
     record_production_error.setVisible(false);
+    production_recorded.setVisible(false);
+    add_product_success.setVisible(false);
     // Populates quantity_comboBox in the produce tab of GUI.
     for (int i = 1; i <= 10; i++) {
       quantity_comboBox.getItems().add(i);
@@ -304,10 +310,21 @@ public class Controller {
     String man_input = manufacturer_input.getText();
     String prod_name_input = product_name_input.getText();
     String item_type = item_type_ChoiceBox.getValue();
-    if (man_input == null || prod_name_input == null || item_type == null) {
+    if (man_input == null
+            || prod_name_input == null
+            || item_type == null
+            || man_input.equals("")
+            || prod_name_input.equals("")
+            || item_type.equals("")) {
       add_product_error.setVisible(true);
+      production_recorded.setVisible(false);
+      record_production_error.setVisible(false);
+      add_product_success.setVisible(false);
     } else {
+      add_product_success.setVisible(true);
       add_product_error.setVisible(false);
+      production_recorded.setVisible(false);
+      record_production_error.setVisible(false);
       try {
         String sql =
                 "INSERT INTO PRODUCT (NAME, TYPE , MANUFACTURER) VALUES ('"
@@ -375,13 +392,17 @@ public class Controller {
         System.out.println("Invalid String - Unable to Define ItemType");
     }
     Product productProduced = new Widget(testing.getName(), testing.getManufacturer(), typeSwitch);
-      if (quantity_comboBox.getValue() == null
-              || String.valueOf(quantity_comboBox.getValue()).equals("")) {
+    String quantityString = String.valueOf(quantity_comboBox.getValue());
+    if (quantity_comboBox.getValue() == null
+            || quantityString.equals("")
+            || !quantityString.matches("[^a-zA-Z]")) {
       record_production_error.setVisible(true);
+      production_recorded.setVisible(false);
+      add_product_error.setVisible(false);
     } else {
       record_production_error.setVisible(false);
+      add_product_error.setVisible(false);
       // gets value from combobox
-      String quantityString = String.valueOf(quantity_comboBox.getValue());
       int quantity = Integer.parseInt(quantityString);
       // Initiates count for Serial Number
       for (int i = 0; i < quantity; i++) {
@@ -415,6 +436,7 @@ public class Controller {
                           + "')";
           // Test Case
           System.out.println("THE SQL STATEMNT: " + sql);
+          production_recorded.setVisible(true);
           try {
             stmt.execute(sql);
           } catch (SQLException e) {
