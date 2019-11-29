@@ -22,36 +22,36 @@ public class Controller {
   @FXML private TextField product_name_input;
   @FXML private ChoiceBox<String> item_type_ChoiceBox;
   @FXML private TableView<Product> products_table;
-  @FXML
-  private Tab manager_tab;
-  @FXML
-  private Label not_manager;
-  @FXML
-  private TableView<EmployeeInfo> employee_table;
-  @FXML
-  private TextField full_name;
-  @FXML
-  private PasswordField new_pass;
-  @FXML
-  private Label gen_user;
-  @FXML
-  private Label gen_email;
-  @FXML
-  private Label generated_username;
-  @FXML
-  private Label generated_email;
-  @FXML
-  private CheckBox manager_account;
-  @FXML
-  private Label incorrect_format;
-  @FXML
-  private Label add_product_error;
-  @FXML
-  private Label record_production_error;
-  @FXML
-  private Label production_recorded;
-  @FXML
-  private Label add_product_success;
+    @FXML
+    private Tab manager_tab;
+    @FXML
+    private Label not_manager;
+    @FXML
+    private TableView<EmployeeInfo> employee_table;
+    @FXML
+    private TextField full_name;
+    @FXML
+    private PasswordField new_pass;
+    @FXML
+    private Label gen_user;
+    @FXML
+    private Label gen_email;
+    @FXML
+    private Label generated_username;
+    @FXML
+    private Label generated_email;
+    @FXML
+    private CheckBox manager_account;
+    @FXML
+    private Label incorrect_format;
+    @FXML
+    private Label add_product_error;
+    @FXML
+    private Label record_production_error;
+    @FXML
+    private Label production_recorded;
+    @FXML
+    private Label add_product_success;
   public static LoggedEmployee log_emp;
   private final String JDBC_DRIVER = "org.h2.Driver";
   private final String DB_URL = "jdbc:h2:./res/GUI_DB";
