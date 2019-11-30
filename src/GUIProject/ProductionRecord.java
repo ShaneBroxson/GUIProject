@@ -109,9 +109,7 @@ public class ProductionRecord {
     return employee;
   }
 
-  /**
-   * @param employee Logged in Employee Username
-   */
+  /** @param employee Logged in Employee Username */
   public void setEmployee(String employee) {
     this.employee = employee;
   }

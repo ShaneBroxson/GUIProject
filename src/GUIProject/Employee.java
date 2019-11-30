@@ -14,7 +14,7 @@ class Employee {
   private Boolean management;
 
   /**
-   * @param name     Employee Name %f(first last)
+   * @param name Employee Name %f(first last)
    * @param password Imputed Employee Password
    */
   Employee(String name, String password, Boolean management) {
@@ -54,9 +54,7 @@ class Employee {
             + this.password;
   }
 
-  /**
-   * @param name Employee Name %f(first last)
-   */
+  /** @param name Employee Name %f(first last) */
   private void setUsername(String name) {
     // this.username = name.replaceAll(" ", ".");
     StringBuilder sb = new StringBuilder(name.toLowerCase());
@@ -84,9 +82,7 @@ class Employee {
     return false;
   }
 
-  /**
-   * @param name Employee Name %f(first last)
-   */
+  /** @param name Employee Name %f(first last) */
   private void setEmail(String name) {
     StringBuilder sb = new StringBuilder(name);
 
@@ -133,37 +129,27 @@ class Employee {
     return false;
   }
 
-  /**
-   * @return Full Name
-   */
+  /** @return Full Name */
   public String getName() {
     return name;
   }
 
-  /**
-   * @return Generated Username
-   */
+  /** @return Generated Username */
   public String getUsername() {
     return username;
   }
 
-  /**
-   * @return User password
-   */
+  /** @return User password */
   public String getPassword() {
     return password;
   }
 
-  /**
-   * @return User email
-   */
+  /** @return User email */
   public String getEmail() {
     return email;
   }
 
-  /**
-   * @return Management status
-   */
+  /** @return Management status */
   public Boolean getManagement() {
     return management;
   }

@@ -20,7 +20,6 @@ public class LoggedEmployee {
         isManagement = management;
     }
 
-
     LoggedEmployee(String userName, Boolean isManagement) {
         this.userName = userName;
         this.isManagement = isManagement;

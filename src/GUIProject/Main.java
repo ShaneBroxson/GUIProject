@@ -1,4 +1,5 @@
 package GUIProject;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,7 +22,7 @@ public class Main extends Application {
    */
   @Override
   public void start(Stage primaryStage) throws Exception {
-      Parent root = FXMLLoader.load(getClass().getResource("../Resources/LoginPage.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("../Resources/LoginPage.fxml"));
     primaryStage.setTitle("GUI Program");
     primaryStage.setScene(new Scene(root, 600, 400));
     primaryStage.show();
