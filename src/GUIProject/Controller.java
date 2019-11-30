@@ -37,6 +37,7 @@ public class Controller {
   @FXML private Label record_production_error;
   @FXML private Label production_recorded;
   @FXML private Label add_product_success;
+  @FXML private Label no_product_selected;
   static LoggedEmployee log_emp;
   private final String JDBC_DRIVER = "org.h2.Driver";
   private final String DB_URL = "jdbc:h2:./res/GUI_DB";
@@ -56,6 +57,7 @@ public class Controller {
     record_production_error.setVisible(false);
     production_recorded.setVisible(false);
     add_product_success.setVisible(false);
+    no_product_selected.setVisible(false);
     // Populates quantity_comboBox in the produce tab of GUI.
     for (int i = 1; i <= 10; i++) {
       quantity_comboBox.getItems().add(i);
@@ -373,15 +375,20 @@ public class Controller {
     }
     Product productProduced = new Widget(testing.getName(), testing.getManufacturer(), typeSwitch);
     String quantityString = String.valueOf(quantity_comboBox.getValue());
+    ObservableList selectedItems = productChoice.getSelectionModel().getSelectedItems();
     if (quantity_comboBox.getValue() == null
         || quantityString.equals("")
-        || !quantityString.matches("[^a-zA-Z]")) {
+        || !quantityString.matches("[^a-zA-Z]") || selectedItems.get(1) == null) {
+      if(selectedItems.get(1) == null){
+        no_product_selected.setVisible(true);
+      }
       record_production_error.setVisible(true);
       production_recorded.setVisible(false);
       add_product_error.setVisible(false);
     } else {
       record_production_error.setVisible(false);
       add_product_error.setVisible(false);
+      no_product_selected.setVisible(false);
       // gets value from combobox
       int quantity = Integer.parseInt(quantityString);
       // Initiates count for Serial Number
