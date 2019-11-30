@@ -376,15 +376,25 @@ public class Controller {
     Product productProduced = new Widget(testing.getName(), testing.getManufacturer(), typeSwitch);
     String quantityString = String.valueOf(quantity_comboBox.getValue());
     ObservableList selectedItems = productChoice.getSelectionModel().getSelectedItems();
+    System.out.println(selectedItems.get(0));
+    no_product_selected.setVisible(false);
+    record_production_error.setVisible(false);
+    production_recorded.setVisible(false);
+    add_product_error.setVisible(false);
     if (quantity_comboBox.getValue() == null
         || quantityString.equals("")
-        || !quantityString.matches("[^a-zA-Z]") || selectedItems.get(1) == null) {
-      if(selectedItems.get(1) == null){
+        || !quantityString.matches("[^a-zA-Z]")
+        || selectedItems.get(0) == null) {
+      if (selectedItems.get(0) == null) {
         no_product_selected.setVisible(true);
       }
-      record_production_error.setVisible(true);
-      production_recorded.setVisible(false);
-      add_product_error.setVisible(false);
+      if (quantity_comboBox.getValue() == null
+          || quantityString.equals("")
+          || !quantityString.matches("[^a-zA-Z]")) {
+        record_production_error.setVisible(true);
+        production_recorded.setVisible(false);
+        add_product_error.setVisible(false);
+      }
     } else {
       record_production_error.setVisible(false);
       add_product_error.setVisible(false);
@@ -406,13 +416,13 @@ public class Controller {
         // ProductionRecord prodRec = new ProductionRecord(testing, itemCount++);
         // Check Product productProduced to find number of ItemType
         ProductionRecord prodRec = new ProductionRecord(productProduced, itemCount);
-        //System.out.println(prodRec.getSerialNum());
+        // System.out.println(prodRec.getSerialNum());
         try {
           Timestamp ts = new Timestamp(prodRec.getProdDate().getTime());
           String sql =
               "INSERT INTO PRODUCTIONRECORD (PRODUCTION_NUM, PRODUCT_ID , SERIAL_NUM, DATE_PRODUCED, RECORDED_EMPLOYEE) VALUES (? , ? , ? , ? , ?)";
           // Test Case
-         // System.out.println("THE SQL STATEMNT: " + sql);
+          // System.out.println("THE SQL STATEMNT: " + sql);
           production_recorded.setVisible(true);
           try {
             PreparedStatement stmt = conn.prepareStatement(sql);
