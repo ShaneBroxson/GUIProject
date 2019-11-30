@@ -102,9 +102,7 @@ public class ProductionRecord {
     return currentDate;
   }
 
-  /**
-   * @return Logged in Employee
-   */
+  /** @return Logged in Employee */
   public String getEmployee() {
     return employee;
   }

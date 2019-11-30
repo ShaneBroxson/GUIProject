@@ -22,36 +22,21 @@ public class Controller {
   @FXML private TextField product_name_input;
   @FXML private ChoiceBox<String> item_type_ChoiceBox;
   @FXML private TableView<Product> products_table;
-  @FXML
-  private Tab manager_tab;
-  @FXML
-  private Label not_manager;
-  @FXML
-  private TableView<EmployeeInfo> employee_table;
-  @FXML
-  private TextField full_name;
-  @FXML
-  private PasswordField new_pass;
-  @FXML
-  private Label gen_user;
-  @FXML
-  private Label gen_email;
-  @FXML
-  private Label generated_username;
-  @FXML
-  private Label generated_email;
-  @FXML
-  private CheckBox manager_account;
-  @FXML
-  private Label incorrect_format;
-  @FXML
-  private Label add_product_error;
-  @FXML
-  private Label record_production_error;
-  @FXML
-  private Label production_recorded;
-  @FXML
-  private Label add_product_success;
+  @FXML private Tab manager_tab;
+  @FXML private Label not_manager;
+  @FXML private TableView<EmployeeInfo> employee_table;
+  @FXML private TextField full_name;
+  @FXML private PasswordField new_pass;
+  @FXML private Label gen_user;
+  @FXML private Label gen_email;
+  @FXML private Label generated_username;
+  @FXML private Label generated_email;
+  @FXML private CheckBox manager_account;
+  @FXML private Label incorrect_format;
+  @FXML private Label add_product_error;
+  @FXML private Label record_production_error;
+  @FXML private Label production_recorded;
+  @FXML private Label add_product_success;
   public static LoggedEmployee log_emp;
   private final String JDBC_DRIVER = "org.h2.Driver";
   private final String DB_URL = "jdbc:h2:./res/GUI_DB";
@@ -142,8 +127,8 @@ public class Controller {
       TableColumn<ProductionRecord, String> col_emp = new TableColumn<>("Employee");
       col_emp.setCellValueFactory(new PropertyValueFactory<>("employee"));
       productionLog
-              .getColumns()
-              .addAll(col_prodNum, col_prodID, col_serialNum, col_currentDate, col_emp);
+          .getColumns()
+          .addAll(col_prodNum, col_prodID, col_serialNum, col_currentDate, col_emp);
 
       // Create Table Columns for Employees In Management tab of GUI
       TableColumn<EmployeeInfo, String> col_uname = new TableColumn<>("Employee Name");
@@ -170,8 +155,8 @@ public class Controller {
       rs = stmt.executeQuery("SELECT * FROM PRODUCTIONRECORD");
       while (rs.next()) {
         productionRecord.add(
-                new ProductionRecord(
-                        rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getTimestamp(4), rs.getString(5)));
+            new ProductionRecord(
+                rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getTimestamp(4), rs.getString(5)));
       }
 
       stmt = conn.createStatement();
@@ -179,7 +164,7 @@ public class Controller {
       while (rs.next()) {
         //        System.out.println(rs.getString(1));
         employeeList.add(
-                new EmployeeInfo(rs.getString(1), rs.getString(2), rs.getString(3), rs.getBoolean(4)));
+            new EmployeeInfo(rs.getString(1), rs.getString(2), rs.getString(3), rs.getBoolean(4)));
       }
     } catch (SQLException ex) {
       ex.printStackTrace();
@@ -217,7 +202,7 @@ public class Controller {
         conn = DriverManager.getConnection(DB_URL);
         stmt = conn.createStatement();
         ResultSet rs =
-                stmt.executeQuery("SELECT NAME, USERNAME , EMAIL , MANAGEMENT FROM EMPLOYEE");
+            stmt.executeQuery("SELECT NAME, USERNAME , EMAIL , MANAGEMENT FROM EMPLOYEE");
         while (rs.next()) {
           if (rs.getString(2).contains(usernameCheck)) {
             nameCount += 1;
@@ -233,17 +218,17 @@ public class Controller {
         }
         String tempPass = employee.getPassword();
         String sql =
-                "INSERT INTO EMPLOYEE (NAME, USERNAME , EMAIL , PASSWORD , MANAGEMENT) VALUES ('"
-                        + employee.getName()
-                        + "', '"
-                        + user_n
-                        + "', '"
-                        + employee.getEmail()
-                        + "', '"
-                        + reverseString(tempPass)
-                        + "', '"
-                        + employee.getManagement()
-                        + "');";
+            "INSERT INTO EMPLOYEE (NAME, USERNAME , EMAIL , PASSWORD , MANAGEMENT) VALUES ('"
+                + employee.getName()
+                + "', '"
+                + user_n
+                + "', '"
+                + employee.getEmail()
+                + "', '"
+                + reverseString(tempPass)
+                + "', '"
+                + employee.getManagement()
+                + "');";
         try {
           stmt.execute(sql);
         } catch (SQLException e) {
@@ -261,13 +246,13 @@ public class Controller {
         conn = DriverManager.getConnection(DB_URL);
         stmt = conn.createStatement();
         ResultSet rs =
-                stmt.executeQuery("SELECT NAME, USERNAME , EMAIL , MANAGEMENT FROM EMPLOYEE");
+            stmt.executeQuery("SELECT NAME, USERNAME , EMAIL , MANAGEMENT FROM EMPLOYEE");
         while (rs.next()) {
           if (rs.last()) {
             ObservableList<EmployeeInfo> employeeList = employee_table.getItems();
             employeeList.add(
-                    new EmployeeInfo(
-                            rs.getString(1), rs.getString(2), rs.getString(3), rs.getBoolean(4)));
+                new EmployeeInfo(
+                    rs.getString(1), rs.getString(2), rs.getString(3), rs.getBoolean(4)));
           }
         }
       } catch (SQLException e) {
@@ -311,11 +296,11 @@ public class Controller {
     String prod_name_input = product_name_input.getText();
     String item_type = item_type_ChoiceBox.getValue();
     if (man_input == null
-            || prod_name_input == null
-            || item_type == null
-            || man_input.equals("")
-            || prod_name_input.equals("")
-            || item_type.equals("")) {
+        || prod_name_input == null
+        || item_type == null
+        || man_input.equals("")
+        || prod_name_input.equals("")
+        || item_type.equals("")) {
       add_product_error.setVisible(true);
       production_recorded.setVisible(false);
       record_production_error.setVisible(false);
@@ -327,13 +312,13 @@ public class Controller {
       record_production_error.setVisible(false);
       try {
         String sql =
-                "INSERT INTO PRODUCT (NAME, TYPE , MANUFACTURER) VALUES ('"
-                        + prod_name_input
-                        + "', '"
-                        + item_type
-                        + "', '"
-                        + man_input
-                        + "')";
+            "INSERT INTO PRODUCT (NAME, TYPE , MANUFACTURER) VALUES ('"
+                + prod_name_input
+                + "', '"
+                + item_type
+                + "', '"
+                + man_input
+                + "')";
         try {
           stmt.execute(sql);
         } catch (SQLException e) {
@@ -357,9 +342,9 @@ public class Controller {
             ObservableList<Product> prodTableList2 = products_table.getItems();
             ObservableList<Product> prodTableList = productChoice.getItems();
             prodTableList.add(
-                    new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+                new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
             prodTableList2.add(
-                    new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+                new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
           }
         }
       } catch (SQLException ex) {
@@ -394,8 +379,8 @@ public class Controller {
     Product productProduced = new Widget(testing.getName(), testing.getManufacturer(), typeSwitch);
     String quantityString = String.valueOf(quantity_comboBox.getValue());
     if (quantity_comboBox.getValue() == null
-            || quantityString.equals("")
-            || !quantityString.matches("[^a-zA-Z]")) {
+        || quantityString.equals("")
+        || !quantityString.matches("[^a-zA-Z]")) {
       record_production_error.setVisible(true);
       production_recorded.setVisible(false);
       add_product_error.setVisible(false);
@@ -423,17 +408,17 @@ public class Controller {
         try {
           Timestamp ts = new Timestamp(prodRec.getProdDate().getTime());
           String sql =
-                  "INSERT INTO PRODUCTIONRECORD (PRODUCTION_NUM, PRODUCT_ID , SERIAL_NUM, DATE_PRODUCED, RECORDED_EMPLOYEE) VALUES ('"
-                          + prodNum
-                          + "', '"
-                          + testing.getId()
-                          + "', '"
-                          + prodRec.getSerialNum()
-                          + "', '"
-                          + ts
-                          + "', '"
-                          + log_emp.getUserName()
-                          + "')";
+              "INSERT INTO PRODUCTIONRECORD (PRODUCTION_NUM, PRODUCT_ID , SERIAL_NUM, DATE_PRODUCED, RECORDED_EMPLOYEE) VALUES ('"
+                  + prodNum
+                  + "', '"
+                  + testing.getId()
+                  + "', '"
+                  + prodRec.getSerialNum()
+                  + "', '"
+                  + ts
+                  + "', '"
+                  + log_emp.getUserName()
+                  + "')";
           // Test Case
           System.out.println("THE SQL STATEMNT: " + sql);
           production_recorded.setVisible(true);
@@ -457,8 +442,8 @@ public class Controller {
           while (rs.next()) {
             if (rs.last()) {
               productionRecord.add(
-                      new ProductionRecord(
-                              rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getDate(4), rs.getString(5)));
+                  new ProductionRecord(
+                      rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getDate(4), rs.getString(5)));
             }
           }
         } catch (SQLException ex) {

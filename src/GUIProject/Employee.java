@@ -39,19 +39,17 @@ class Employee {
     }
   }
 
-  /**
-   * @return Overrides toString method for Employee
-   */
+  /** @return Overrides toString method for Employee */
   public String toString() {
     return "Employee Details\n"
-            + "Name : "
-            + this.name
-            + "\nUsername : "
-            + this.username
-            + "\nEmail : "
-            + this.email
-            + "\nInitial Password : "
-            + this.password;
+        + "Name : "
+        + this.name
+        + "\nUsername : "
+        + this.username
+        + "\nEmail : "
+        + this.email
+        + "\nInitial Password : "
+        + this.password;
   }
 
   /** @param name Employee Name %f(first last) */
