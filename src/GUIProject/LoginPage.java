@@ -25,8 +25,8 @@ public class LoginPage {
   @FXML private TextField userName;
   @FXML private PasswordField passWord;
   @FXML private Label failedLogin;
-  private final String JDBC_DRIVER = "org.h2.Driver";
-  private final String DB_URL = "jdbc:h2:./res/GUI_DB";
+  private static final String JDBC_DRIVER = "org.h2.Driver";
+  private static final String DB_URL = "jdbc:h2:./res/GUI_DB";
   private Connection conn = null;
   private Statement stmt = null;
 

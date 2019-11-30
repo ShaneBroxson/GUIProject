@@ -9,30 +9,31 @@ import java.util.Date;
  * @author Shane Broxson
  */
 public class ProductionRecord {
-  private static int produced;
+  private int produced;
   private int prodNum;
   private int prodID;
   private String serialNum;
   private Date currentDate;
   private String employee;
 
-  /** @param pn Production Number */
-  ProductionRecord(int pn) {
-    prodNum = pn;
-    prodID = 0;
-    serialNum = "0";
-    currentDate = new Date();
-  }
+//  /** @param pn Production Number */
+//  ProductionRecord(int pn) {
+//    prodNum = pn;
+//    prodID = 0;
+//    serialNum = "0";
+//    currentDate = new Date();
+//  }
 
   /**
    * @param W Object Product
    * @param produced Number of each based on ItemType used to generate Serial Number
    */
   ProductionRecord(Product W, int produced) {
+    this.produced = produced;
     this.prodID = W.getId();
     // create a better counting system for serial num
     String manUpdate = W.getManufacturer().replaceAll(" ", "_").toUpperCase().substring(0, 3);
-    serialNum = manUpdate + W.getTypes().item_type_abr + String.format("%05d", produced);
+    serialNum = manUpdate + W.getTypes().item_type_abr + String.format("%05d", this.produced);
     currentDate = new Date();
   }
 
@@ -79,7 +80,7 @@ public class ProductionRecord {
 
   /** @param currentDate Product Current Date */
   public void setProdDate(Date currentDate) {
-    this.currentDate = currentDate;
+    this.currentDate = new Date(currentDate.getTime());
   }
 
   /** @return Production Number */
@@ -99,7 +100,7 @@ public class ProductionRecord {
 
   /** @return Product Current Date */
   public Date getProdDate() {
-    return currentDate;
+    return new Date(currentDate.getTime());
   }
 
   /** @return Logged in Employee */

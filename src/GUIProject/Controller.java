@@ -37,7 +37,7 @@ public class Controller {
   @FXML private Label record_production_error;
   @FXML private Label production_recorded;
   @FXML private Label add_product_success;
-  public static LoggedEmployee log_emp;
+  static LoggedEmployee log_emp;
   private final String JDBC_DRIVER = "org.h2.Driver";
   private final String DB_URL = "jdbc:h2:./res/GUI_DB";
 
@@ -218,19 +218,16 @@ public class Controller {
         }
         String tempPass = employee.getPassword();
         String sql =
-            "INSERT INTO EMPLOYEE (NAME, USERNAME , EMAIL , PASSWORD , MANAGEMENT) VALUES ('"
-                + employee.getName()
-                + "', '"
-                + user_n
-                + "', '"
-                + employee.getEmail()
-                + "', '"
-                + reverseString(tempPass)
-                + "', '"
-                + employee.getManagement()
-                + "');";
+            "INSERT INTO EMPLOYEE (NAME, USERNAME , EMAIL , PASSWORD , MANAGEMENT) VALUES (?, ?, ?, ?, ?)";
         try {
-          stmt.execute(sql);
+          PreparedStatement stmtp = conn.prepareStatement(sql);
+          stmtp.setString(1, employee.getName());
+          stmtp.setString(2, user_n);
+          stmtp.setString(3, employee.getEmail());
+          stmtp.setString(4, reverseString(tempPass));
+          stmtp.setBoolean(5, employee.getManagement());
+          stmtp.executeUpdate();
+          stmtp.close();
         } catch (SQLException e) {
           e.printStackTrace();
         }
@@ -311,16 +308,14 @@ public class Controller {
       production_recorded.setVisible(false);
       record_production_error.setVisible(false);
       try {
-        String sql =
-            "INSERT INTO PRODUCT (NAME, TYPE , MANUFACTURER) VALUES ('"
-                + prod_name_input
-                + "', '"
-                + item_type
-                + "', '"
-                + man_input
-                + "')";
+        String sql = "INSERT INTO PRODUCT (NAME, TYPE , MANUFACTURER) VALUES (?, ? , ?)";
         try {
-          stmt.execute(sql);
+          PreparedStatement pstmt = conn.prepareStatement(sql);
+          pstmt.setString(1, prod_name_input);
+          pstmt.setString(2, item_type);
+          pstmt.setString(3, man_input);
+          pstmt.executeUpdate();
+          pstmt.close();
         } catch (SQLException e) {
           e.printStackTrace();
         }
@@ -404,26 +399,23 @@ public class Controller {
         // ProductionRecord prodRec = new ProductionRecord(testing, itemCount++);
         // Check Product productProduced to find number of ItemType
         ProductionRecord prodRec = new ProductionRecord(productProduced, itemCount);
-        System.out.println(prodRec.getSerialNum());
+        //System.out.println(prodRec.getSerialNum());
         try {
           Timestamp ts = new Timestamp(prodRec.getProdDate().getTime());
           String sql =
-              "INSERT INTO PRODUCTIONRECORD (PRODUCTION_NUM, PRODUCT_ID , SERIAL_NUM, DATE_PRODUCED, RECORDED_EMPLOYEE) VALUES ('"
-                  + prodNum
-                  + "', '"
-                  + testing.getId()
-                  + "', '"
-                  + prodRec.getSerialNum()
-                  + "', '"
-                  + ts
-                  + "', '"
-                  + log_emp.getUserName()
-                  + "')";
+              "INSERT INTO PRODUCTIONRECORD (PRODUCTION_NUM, PRODUCT_ID , SERIAL_NUM, DATE_PRODUCED, RECORDED_EMPLOYEE) VALUES (? , ? , ? , ? , ?)";
           // Test Case
-          System.out.println("THE SQL STATEMNT: " + sql);
+         // System.out.println("THE SQL STATEMNT: " + sql);
           production_recorded.setVisible(true);
           try {
-            stmt.execute(sql);
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, prodNum);
+            stmt.setInt(2, testing.getId());
+            stmt.setString(3, prodRec.getSerialNum());
+            stmt.setTimestamp(4, ts);
+            stmt.setString(5, log_emp.getUserName());
+            stmt.executeUpdate();
+            stmt.close();
           } catch (SQLException e) {
             e.printStackTrace();
           }
