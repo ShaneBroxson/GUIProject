@@ -9,8 +9,7 @@ Project created by Shane Broxson. Made in the fall of 2019. No prior experience 
 ![Diagram](docs/GUI_DB.png)
 ![Diagram](docs/DB.png)
 ## Getting Started
-Executable
-Source
+To login to the program use the following Username/Password (admin/Adm!n).
 ## Built With
 * Intellij by JetBrains
 * Java Version 8
