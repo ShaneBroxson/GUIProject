@@ -7,7 +7,6 @@ Project created by Shane Broxson. Made in the fall of 2019. No prior experience 
 ## Diagrams
 ![Diagram](docs/GUIProject.png)
 ![Diagram](docs/GUI_DB.png)
-![Diagram](docs/DB.png)
 ## Getting Started
 To login to the program use the following Username/Password (admin/Adm!n).
 ## Built With
