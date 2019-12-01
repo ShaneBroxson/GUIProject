@@ -41,6 +41,10 @@ public class Controller {
   static LoggedEmployee log_emp;
   private final String JDBC_DRIVER = "org.h2.Driver";
   private final String DB_URL = "jdbc:h2:./res/GUI_DB";
+  //create a password and load from file
+  //move h2 file to res folder and change dependencies
+  //find out problem with showing new dates
+  //create a remove or filter ability with tables
 
   private Connection conn = null;
   private Statement stmt = null;
