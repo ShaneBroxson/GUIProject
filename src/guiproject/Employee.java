@@ -1,7 +1,7 @@
-package GUIProject;
+package guiproject;
 
 /**
- * Employee Username and Password Generation and Validation
+ * Employee Username and Password Generation and Validation.
  *
  * @author Shane Broxson
  * @file Employee.java
@@ -14,6 +14,8 @@ class Employee {
   private Boolean management;
 
   /**
+   * Employee subclass for checking new employee information and setting it if valid.
+   *
    * @param name Employee Name %f(first last)
    * @param password Imputed Employee Password
    */
@@ -39,7 +41,11 @@ class Employee {
     }
   }
 
-  /** @return Overrides toString method for Employee */
+  /**
+   * Overrides toString() method for Employee class.
+   *
+   * @return Overrides toString method for Employee
+   */
   public String toString() {
     return "Employee Details\n"
         + "Name : "
@@ -52,7 +58,11 @@ class Employee {
         + this.password;
   }
 
-  /** @param name Employee Name %f(first last) */
+  /**
+   * Creates Username for Employee based on their full name.
+   *
+   * @param name Employee Name %f(first last)
+   */
   private void setUsername(String name) {
     // this.username = name.replaceAll(" ", ".");
     StringBuilder sb = new StringBuilder(name.toLowerCase());
@@ -67,6 +77,8 @@ class Employee {
   }
 
   /**
+   * Checks if the name was inputted in the correct format.
+   *
    * @param name Employee Name %f(first last)
    * @return If name is inputted in correct format returns true, otherwise false
    */
@@ -80,7 +92,11 @@ class Employee {
     return false;
   }
 
-  /** @param name Employee Name %f(first last) */
+  /**
+   * Sets the email based on the inputted Employee full name.
+   *
+   * @param name Employee Name %f(first last)
+   */
   private void setEmail(String name) {
     StringBuilder sb = new StringBuilder(name);
 
@@ -102,6 +118,8 @@ class Employee {
   }
 
   /**
+   * Checks if the inputted Employee password is valid.
+   *
    * @param password Employee Password
    * @return If password meets security requirements then returns true, otherwise returns false
    */
@@ -127,27 +145,47 @@ class Employee {
     return false;
   }
 
-  /** @return Full Name */
+  /**
+   * Return for the Employee full name.
+   *
+   * @return Full Name
+   */
   public String getName() {
     return name;
   }
 
-  /** @return Generated Username */
+  /**
+   * Return for the Employee username.
+   *
+   * @return Generated Username
+   */
   public String getUsername() {
     return username;
   }
 
-  /** @return User password */
+  /**
+   * Return for the Employee password.
+   *
+   * @return User password
+   */
   public String getPassword() {
     return password;
   }
 
-  /** @return User email */
+  /**
+   * Return for the Employee email.
+   *
+   * @return User email
+   */
   public String getEmail() {
     return email;
   }
 
-  /** @return Management status */
+  /**
+   * Returns whether or not a Employee is a manager.
+   *
+   * @return Management status
+   */
   public Boolean getManagement() {
     return management;
   }

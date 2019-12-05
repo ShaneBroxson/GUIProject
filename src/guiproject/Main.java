@@ -1,4 +1,4 @@
-package GUIProject;
+package guiproject;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
   /**
-   * Initializes GUI interface
+   * Initializes GUI interface and set resource location.
    *
    * @param primaryStage Initialize Primary Scene for GUI
    * @throws Exception Unable to find Correct FXML file
@@ -28,7 +28,11 @@ public class Main extends Application {
     primaryStage.show();
   }
 
-  /** @param args Starts program. */
+  /**
+   * Launches the Program.
+   *
+   * @param args Starts program.
+   */
   public static void main(String[] args) {
     launch(args);
   }

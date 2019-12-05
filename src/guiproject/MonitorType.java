@@ -1,4 +1,4 @@
-package GUIProject;
+package guiproject;
 
 /**
  * Establishes possible monitor types for visual products.

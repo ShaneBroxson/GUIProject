@@ -1,4 +1,4 @@
-package GUIProject;
+package guiproject;
 
 /**
  * Class to create objects of Product that implements Item.
@@ -15,6 +15,8 @@ public class Product implements Item {
   private String abr;
 
   /**
+   * Subclass for Product to initially set values.
+   *
    * @param i integer id
    * @param n string name
    * @param t string item type
@@ -28,6 +30,8 @@ public class Product implements Item {
   }
 
   /**
+   * Subclass after Sting type is turned into custom type ItemType.
+   *
    * @param n string name
    * @param m string manufacturer
    * @param t ItemType type
@@ -38,84 +42,120 @@ public class Product implements Item {
     types = t;
   }
 
-  /** @return An override to toString method */
+  /**
+   * Overrides toString() for Product.
+   *
+   * @return An override to toString method
+   */
   public String toString() {
     return "Name: " + name + "\nManufacturer: " + manufacturer + "\nType: " + type;
   }
 
-  /** @return Product ID */
+  /**
+   * Returns Product ID.
+   *
+   * @return Product ID
+   */
   public int getId() {
     return id;
   }
 
-  /** @param id Sets Product ID */
+  /**
+   * Sets Product ID.
+   *
+   * @param id Sets Product ID
+   */
   public void setId(int id) {
     this.id = id;
   }
 
-  /** @return Product Name */
+  /**
+   * Returns Product Name.
+   *
+   * @return Product Name
+   */
   public String getName() {
     return name;
   }
 
-  /** @param name Sets Product Name */
+  /**
+   * Sets Product Name.
+   *
+   * @param name Sets Product Name
+   */
   public void setName(String name) {
     this.name = name;
   }
 
-  /** @return Product Manufacturer */
+  /**
+   * Returns Product Manufacturer.
+   *
+   * @return Product Manufacturer
+   */
   public String getManufacturer() {
     return manufacturer;
   }
 
-  /** @param manufacturer Sets Product Manufacturer */
+  /**
+   * Sets Product Manufacturer.
+   *
+   * @param manufacturer Sets Product Manufacturer
+   */
   public void setManufacturer(String manufacturer) {
     this.manufacturer = manufacturer;
   }
 
-  /** @return Product Type */
+  /**
+   * Returns Product Type (String).
+   *
+   * @return Product Type
+   */
   public String getType() {
     return type;
   }
 
-  /** @param type Sets Product Type */
+  /**
+   * Sets Product Type (String).
+   *
+   * @param type Sets Product Type
+   */
   public void setType(String type) {
     this.type = type;
   }
 
-  /** @return Product Types */
+  /**
+   * Returns Product Types (ItemType).
+   *
+   * @return Product Types
+   */
   public ItemType getTypes() {
     return types;
   }
 
-  /** @param types Sets Product Types (custom datatype) */
+  /**
+   * Sets Product Types (ItemType).
+   *
+   * @param types Sets Product Types
+   */
   public void setTypes(ItemType types) {
     this.types = types;
   }
 
-  /** @return abbreviated ItemType */
+  /**
+   * Returns Product abbreviated ItemType.
+   *
+   * @return abbreviated ItemType
+   */
   public String getAbr() {
     return abr;
   }
 
-  /** @param abr Sets abbreviated ItemType */
+  /**
+   * Sets the Product abbreviated ItemType.
+   *
+   * @param abr Sets abbreviated ItemType
+   */
   public void setAbr(String abr) {
     this.abr = abr;
-  }
-}
-
-/**
- * Subclass to extend Product
- *
- * @file Product.java
- * @author Shane Broxson
- */
-class Widget extends Product {
-  Widget(int i, String n, String t, String m) {
-    super(i, n, t, m);
-  }
-
-  Widget(String n, String m, ItemType t) {
-    super(n, m, t);
   }
 }

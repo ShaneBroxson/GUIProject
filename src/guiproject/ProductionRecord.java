@@ -1,4 +1,4 @@
-package GUIProject;
+package guiproject;
 
 import java.util.Date;
 
@@ -16,28 +16,32 @@ public class ProductionRecord {
   private Date currentDate;
   private String employee;
 
-//  /** @param pn Production Number */
-//  ProductionRecord(int pn) {
-//    prodNum = pn;
-//    prodID = 0;
-//    serialNum = "0";
-//    currentDate = new Date();
-//  }
+  //  /** @param pn Production Number */
+  //  ProductionRecord(int pn) {
+  //    prodNum = pn;
+  //    prodID = 0;
+  //    serialNum = "0";
+  //    currentDate = new Date();
+  //  }
 
   /**
-   * @param W Object Product
+   * ProductionRecord subclass containing a Product and count of Product Type produced.
+   *
+   * @param product Object Product
    * @param produced Number of each based on ItemType used to generate Serial Number
    */
-  ProductionRecord(Product W, int produced) {
+  ProductionRecord(Product product, int produced) {
     this.produced = produced;
-    this.prodID = W.getId();
+    this.prodID = product.getId();
     // create a better counting system for serial num
-    String manUpdate = W.getManufacturer().replaceAll(" ", "_").toUpperCase().substring(0, 3);
-    serialNum = manUpdate + W.getTypes().item_type_abr + String.format("%05d", this.produced);
+    String manUpdate = product.getManufacturer().replaceAll(" ", "_").toUpperCase().substring(0, 3);
+    serialNum = manUpdate + product.getTypes().itemTypeAbr + String.format("%05d", this.produced);
     currentDate = new Date();
   }
 
   /**
+   * ProductionRecord subclass used when pulling from Database.
+   *
    * @param prodNum Production Number
    * @param prodID Production ID
    * @param serialNum Product Serial Number
@@ -51,7 +55,11 @@ public class ProductionRecord {
     this.employee = employee;
   }
 
-  /** @return override to toString method for ProductionRecord */
+  /**
+   * Overrides toString() for ProductionRecord.
+   *
+   * @return override to toString method for ProductionRecord
+   */
   public String toString() {
     return "Prod. Num: "
         + prodNum
@@ -63,52 +71,92 @@ public class ProductionRecord {
         + currentDate;
   }
 
-  /** @param prodNum Production Number */
+  /**
+   * Sets the Production Number.
+   *
+   * @param prodNum Production Number
+   */
   public void setProductionNum(int prodNum) {
     this.prodNum = prodNum;
   }
 
-  /** @param prodID Product ID */
+  /**
+   * Sets the Product ID.
+   *
+   * @param prodID Product ID
+   */
   public void setProductID(int prodID) {
     this.prodID = prodID;
   }
 
-  /** @param serialNum Serial Number */
+  /**
+   * Sets the Serial Number.
+   *
+   * @param serialNum Serial Number
+   */
   public void setSerialNum(String serialNum) {
     this.serialNum = serialNum;
   }
 
-  /** @param currentDate Product Current Date */
+  /**
+   * Sets the Product Date.
+   *
+   * @param currentDate Product Current Date
+   */
   public void setProdDate(Date currentDate) {
     this.currentDate = new Date(currentDate.getTime());
   }
 
-  /** @return Production Number */
+  /**
+   * Returns the Production Number.
+   *
+   * @return Production Number
+   */
   public int getProductionNum() {
     return prodNum;
   }
 
-  /** @return Product ID */
+  /**
+   * Returns the Product ID.
+   *
+   * @return Product ID
+   */
   public int getProductID() {
     return prodID;
   }
 
-  /** @return Product Serial Number */
+  /**
+   * Returns the Product Serial Number.
+   *
+   * @return Product Serial Number
+   */
   public String getSerialNum() {
     return serialNum;
   }
 
-  /** @return Product Current Date */
+  /**
+   * Returns the Product Current Date.
+   *
+   * @return Product Current Date
+   */
   public Date getProdDate() {
     return new Date(currentDate.getTime());
   }
 
-  /** @return Logged in Employee */
+  /**
+   * Returns Employee who created Product.
+   *
+   * @return Logged in Employee
+   */
   public String getEmployee() {
     return employee;
   }
 
-  /** @param employee Logged in Employee Username */
+  /**
+   * Sets the Employee based on Account logged in.
+   *
+   * @param employee Logged in Employee Username
+   */
   public void setEmployee(String employee) {
     this.employee = employee;
   }

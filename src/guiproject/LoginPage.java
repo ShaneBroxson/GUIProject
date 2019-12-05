@@ -1,18 +1,21 @@
-package GUIProject;
+package guiproject;
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import java.io.IOException;
-import java.sql.*;
 
 /**
  * Start Scene for Login Page and Authentication.
@@ -35,11 +38,15 @@ public class LoginPage {
     failedLogin.setVisible(false);
   }
 
-  /** @param event ChangeScene event */
+  /**
+   * Checks if login matches database, if it does changes scene to ProductionTracker.
+   *
+   * @param event ChangeScene event
+   */
   @FXML
   void loginBtn(ActionEvent event) throws SQLException {
-    String user_name = userName.getText();
-    String pass_word = passWord.getText();
+    String userName = this.userName.getText();
+    String passWord = this.passWord.getText();
     // check to saved database match
     try {
       Class.forName(JDBC_DRIVER);
@@ -52,7 +59,7 @@ public class LoginPage {
       ResultSet rs = stmt.executeQuery("SELECT * FROM EMPLOYEE");
       while (rs.next()) {
         //  System.out.println(rs.getString(2));
-        if (rs.getString(2).equals(user_name) && rs.getString(4).equals(reverseString(pass_word))) {
+        if (rs.getString(2).equals(userName) && rs.getString(4).equals(reverseString(passWord))) {
           boolean management = rs.getBoolean(5);
           FXMLLoader loader = new FXMLLoader();
           loader.setLocation(getClass().getResource("../Resources/GUIProject.fxml"));
@@ -62,7 +69,7 @@ public class LoginPage {
             e.printStackTrace();
           }
           Controller c = loader.getController();
-          c.sendUserInfo(user_name, management);
+          c.sendUserInfo(userName, management);
           Parent contParent =
               FXMLLoader.load(getClass().getResource("../Resources/GUIProject.fxml"));
           Scene contScene = new Scene(contParent);
@@ -79,6 +86,8 @@ public class LoginPage {
   }
 
   /**
+   * Reverses inputted Password.
+   *
    * @param id Inputted Password
    * @return Encrypted Testcase
    */

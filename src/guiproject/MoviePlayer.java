@@ -1,4 +1,4 @@
-package GUIProject;
+package guiproject;
 
 /**
  * Establishes what information MoviePlayer holds.
@@ -11,6 +11,8 @@ public class MoviePlayer extends Product implements MultimediaControl {
   private MonitorType monitorType;
 
   /**
+   * MoviePlayer subclass that extends Product with Screen Type and Monitor Type.
+   *
    * @param n Product Name for super of Product
    * @param m Product Manufacturer for super of Product
    * @param scr Screen Type
@@ -38,7 +40,11 @@ public class MoviePlayer extends Product implements MultimediaControl {
     System.out.println("Next Movie");
   }
 
-  /** @return override of toString method for MoviePlayer */
+  /**
+   * Overrides toString() for MoviePlayer.
+   *
+   * @return override of toString method for MoviePlayer
+   */
   public String toString() {
     System.out.println(super.toString());
     return "Screen\n" + screen.toString() + "\nMonitor Type: " + monitorType.toString();

@@ -17,22 +17,33 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIProject.Controller">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+         prefWidth="900.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171"
+         xmlns:fx="http://javafx.com/fxml/1" fx:controller="guiproject.Controller">
     <tabs>
         <Tab text="Produce">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <children>
-                        <Label layoutX="222.0" layoutY="73.0" text="Choose Product" />
-                        <TableView fx:id="productChoice" layoutX="55.0" layoutY="101.0" prefHeight="391.0" prefWidth="419.0" />
-                        <Label layoutX="636.0" layoutY="207.0" text="Choose Quantitiy" />
-                        <ComboBox fx:id="quantity_comboBox" layoutX="607.0" layoutY="242.0" prefWidth="150.0" />
-                        <Button fx:id="btn_record_production" layoutX="625.0" layoutY="284.0" mnemonicParsing="false" onAction="#record_prod" text="Record Production" />
-                        <Button fx:id="manager_access_btn" layoutX="716.0" layoutY="14.0" mnemonicParsing="false" onAction="#managementAccess" text="Manager Access" />
-                        <Label fx:id="not_manager" layoutX="652.0" layoutY="39.0" text="Account Signed in is not a Manager" />
-                        <Label fx:id="record_production_error" layoutX="564.0" layoutY="322.0" text="Please Choose A Quantity to Record" />
-                        <Label fx:id="production_recorded" layoutX="559.0" layoutY="322.0" text="Successfully added to Production Log" />
-                  <Label fx:id="no_product_selected" layoutX="602.0" layoutY="342.0" text="Please Choose a Product" />
+                        <Label layoutX="222.0" layoutY="73.0" text="Choose Product"/>
+                        <TableView fx:id="productChoice" layoutX="55.0" layoutY="101.0" prefHeight="391.0"
+                                   prefWidth="419.0"/>
+                        <Label layoutX="636.0" layoutY="207.0" text="Choose Quantitiy"/>
+                        <ComboBox fx:id="quantityComboBox" layoutX="607.0" layoutY="242.0" prefWidth="150.0"/>
+                        <Button fx:id="btn_record_production" layoutX="625.0" layoutY="284.0" mnemonicParsing="false"
+                                onAction="#record_prod" text="Record Production"/>
+                        <Button fx:id="manager_access_btn" layoutX="716.0" layoutY="14.0" mnemonicParsing="false"
+                                onAction="#managementAccess" text="Manager Access"/>
+                        <Label fx:id="notManager" layoutX="652.0" layoutY="39.0"
+                               text="Account Signed in is not a Manager"/>
+                        <Label fx:id="recordProductionError" layoutX="564.0" layoutY="322.0"
+                               text="Please Choose A Quantity to Record"/>
+                        <Label fx:id="productionRecorded" layoutX="559.0" layoutY="322.0"
+                               text="Successfully added to Production Log"/>
+                        <Label fx:id="noProductSelected" layoutX="602.0" layoutY="342.0"
+                               text="Please Choose a Product"/>
+                        <Button layoutX="742.0" layoutY="60.0" mnemonicParsing="false" onAction="#logging_out"
+                                text="Logout"/>
                     </children>
                 </AnchorPane>
             </content>
@@ -41,30 +52,39 @@
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <children>
-                        <Label layoutX="641.0" layoutY="103.0" text="Existing Products" />
+                        <Label layoutX="641.0" layoutY="103.0" text="Existing Products"/>
                         <GridPane layoutX="-50.0" layoutY="153.0" prefHeight="266.0" prefWidth="526.0">
                             <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                             </columnConstraints>
                             <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                             </rowConstraints>
                             <children>
-                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="114.0" prefWidth="276.0" text="Manufacturer" />
-                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="92.0" prefWidth="274.0" text="Product Name" GridPane.rowIndex="1" />
-                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="100.0" prefWidth="279.0" text="Item Type" GridPane.rowIndex="2" />
-                                <TextField fx:id="manufacturer_input" GridPane.columnIndex="1" />
-                                <TextField fx:id="product_name_input" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                <ChoiceBox fx:id="item_type_ChoiceBox" prefHeight="25.0" prefWidth="149.0" stylesheets="@../GUIProject/main.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="114.0" prefWidth="276.0"
+                                       text="Manufacturer"/>
+                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="92.0" prefWidth="274.0"
+                                       text="Product Name" GridPane.rowIndex="1"/>
+                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="100.0" prefWidth="279.0"
+                                       text="Item Type" GridPane.rowIndex="2"/>
+                                <TextField fx:id="manufacturerInput" GridPane.columnIndex="1"/>
+                                <TextField fx:id="productNameInput" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                                <ChoiceBox fx:id="itemTypeChoiceBox" prefHeight="25.0" prefWidth="149.0"
+                                           stylesheets="@../guiproject/main.css" GridPane.columnIndex="1"
+                                           GridPane.rowIndex="2"/>
                             </children>
                         </GridPane>
-                        <TableView fx:id="products_table" layoutX="505.0" layoutY="134.0" prefHeight="354.0" prefWidth="385.0" />
-                        <Button fx:id="btn_add_product" layoutX="213.0" layoutY="419.0" mnemonicParsing="false" onAction="#addProduct" text="Add Product" />
-                        <Label fx:id="add_product_error" layoutX="213.0" layoutY="468.0" text="*Please Fill Out All Fields*" />
-                        <Label fx:id="add_product_success" layoutX="166.0" layoutY="468.0" text="Product Successfully Added" />
+                        <TableView fx:id="productsTable" layoutX="505.0" layoutY="134.0" prefHeight="354.0"
+                                   prefWidth="385.0"/>
+                        <Button fx:id="btn_add_product" layoutX="213.0" layoutY="419.0" mnemonicParsing="false"
+                                onAction="#addProduct" text="Add Product"/>
+                        <Label fx:id="addProductError" layoutX="213.0" layoutY="468.0"
+                               text="*Please Fill Out All Fields*"/>
+                        <Label fx:id="addProductSuccess" layoutX="166.0" layoutY="468.0"
+                               text="Product Successfully Added"/>
                     </children>
                 </AnchorPane>
             </content>
@@ -73,40 +93,47 @@
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <children>
-                        <TableView fx:id="productionLog" layoutY="6.0" prefHeight="559.0" prefWidth="900.0" />
+                        <TableView fx:id="productionLog" layoutY="6.0" prefHeight="559.0" prefWidth="900.0"/>
                     </children>
                 </AnchorPane>
             </content>
         </Tab>
-        <Tab fx:id="manager_tab" text="Management">
+        <Tab fx:id="managerTab" text="Management">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <children>
-                        <TableView fx:id="employee_table" layoutX="455.0" layoutY="113.0" prefHeight="325.0" prefWidth="439.0" />
-                        <Label layoutX="608.0" layoutY="85.0" text="Current Employees" />
-                        <Label layoutX="112.0" layoutY="85.0" text="Create New Employee Account" />
-                        <Label layoutX="45.0" layoutY="130.0" text="First and Last Name:" />
-                        <Label layoutX="45.0" layoutY="175.0" text="Password:" />
-                        <TextField fx:id="full_name" layoutX="214.0" layoutY="128.0" />
-                        <PasswordField fx:id="new_pass" layoutX="214.0" layoutY="172.0" />
-                        <Label layoutX="21.0" layoutY="204.0" prefHeight="20.0" prefWidth="441.0" text="*Must contain an uppercase, a lowercase, and a special character*" />
-                        <Button fx:id="add_account" layoutX="157.0" layoutY="319.0" mnemonicParsing="false" onAction="#generated_info" text="Add Account" />
-                        <Label fx:id="gen_user" layoutX="45.0" layoutY="387.0" text="Generated Username:" />
-                        <Label fx:id="gen_email" layoutX="45.0" layoutY="418.0" text="Generated Email:" />
-                        <Label fx:id="generated_username" layoutX="209.0" layoutY="387.0" prefHeight="20.0" prefWidth="151.0" text="(Generated Username)" />
-                        <Label fx:id="generated_email" layoutX="208.0" layoutY="418.0" prefHeight="20.0" prefWidth="153.0" text="(Generated Email)" />
-                        <CheckBox fx:id="manager_account" layoutX="214.0" layoutY="224.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="163.0" text="Manager Account" textFill="#f933ff">
+                        <TableView fx:id="employeeTable" layoutX="455.0" layoutY="113.0" prefHeight="325.0"
+                                   prefWidth="439.0"/>
+                        <Label layoutX="608.0" layoutY="85.0" text="Current Employees"/>
+                        <Label layoutX="112.0" layoutY="85.0" text="Create New Employee Account"/>
+                        <Label layoutX="45.0" layoutY="130.0" text="First and Last Name:"/>
+                        <Label layoutX="45.0" layoutY="175.0" text="Password:"/>
+                        <TextField fx:id="fullName" layoutX="214.0" layoutY="128.0"/>
+                        <PasswordField fx:id="newPass" layoutX="214.0" layoutY="172.0"/>
+                        <Label layoutX="21.0" layoutY="204.0" prefHeight="20.0" prefWidth="441.0"
+                               text="*Must contain an uppercase, a lowercase, and a special character*"/>
+                        <Button fx:id="add_account" layoutX="157.0" layoutY="319.0" mnemonicParsing="false"
+                                onAction="#generated_info" text="Add Account"/>
+                        <Label fx:id="genUser" layoutX="45.0" layoutY="387.0" text="Generated Username:"/>
+                        <Label fx:id="genEmail" layoutX="45.0" layoutY="418.0" text="Generated Email:"/>
+                        <Label fx:id="generatedUsername" layoutX="209.0" layoutY="387.0" prefHeight="20.0"
+                               prefWidth="151.0" text="(Generated Username)"/>
+                        <Label fx:id="generatedEmail" layoutX="208.0" layoutY="418.0" prefHeight="20.0"
+                               prefWidth="153.0" text="(Generated Email)"/>
+                        <CheckBox fx:id="managerAccount" layoutX="214.0" layoutY="224.0" mnemonicParsing="false"
+                                  prefHeight="33.0" prefWidth="163.0" text="Manager Account" textFill="#f933ff">
                             <font>
-                                <Font size="16.0" />
+                                <Font size="16.0"/>
                             </font>
                         </CheckBox>
-                        <Label fx:id="incorrect_format" layoutX="71.0" layoutY="286.0" text="Format of Name (First name Last name)" />
+                        <Label fx:id="incorrectFormat" layoutX="71.0" layoutY="286.0"
+                               text="Format of Name (First name Last name)"/>
                     </children>
                 </AnchorPane>
             </content>
         </Tab>
     </tabs>
     <stylesheets>
-        <URL value="@../GUIProject/main.css" />
+        <URL value="@../guiproject/main.css"/>
     </stylesheets>
 </TabPane>

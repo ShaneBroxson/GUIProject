@@ -1,4 +1,4 @@
-package GUIProject;
+package guiproject;
 
 /**
  * Establishes screen details for MoviePlayer.
@@ -12,6 +12,8 @@ public class Screen implements ScreenSpec {
   int responsetime;
 
   /**
+   * Screen subclass containing Screens Resolution, Refresh Rate, and Response Time.
+   *
    * @param reso Screen Resolution
    * @param refr Screen Refresh Rate
    * @param resp Screen Response Time
@@ -22,7 +24,11 @@ public class Screen implements ScreenSpec {
     responsetime = resp;
   }
 
-  /** @return override to toString method for Screen */
+  /**
+   * Overrides toString() for Screen.
+   *
+   * @return override to toString method for Screen
+   */
   public String toString() {
     return "Resolution: "
         + resolution

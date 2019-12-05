@@ -1,4 +1,4 @@
-package GUIProject;
+package guiproject;
 
 /**
  * Interface for Screen (MoviePlayer).

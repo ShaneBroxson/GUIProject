@@ -1,4 +1,4 @@
-package GUIProject;
+package guiproject;
 
 /**
  * Establishes functions for Movie % Audio Players.

@@ -1,4 +1,4 @@
-package GUIProject;
+package guiproject;
 
 public class LoggedEmployee {
   private String userName;

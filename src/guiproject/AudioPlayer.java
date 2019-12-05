@@ -1,4 +1,4 @@
-package GUIProject;
+package guiproject;
 
 /**
  * Extension for ItemType Audio.
@@ -11,6 +11,8 @@ public class AudioPlayer extends Product implements MultimediaControl {
   private String mediaType;
 
   /**
+   * AudioPlayer subclass extending product with audioSpecification and mediaType.
+   *
    * @param n Product Name
    * @param m Product Manufacturer
    * @param audioSpecification AudioSpecification
@@ -38,7 +40,11 @@ public class AudioPlayer extends Product implements MultimediaControl {
     System.out.println("Next");
   }
 
-  /** @return override to toString method for AudioPlayer */
+  /**
+   * Overrides toString() method for AudioPlayer Class.
+   *
+   * @return override to toString method for AudioPlayer
+   */
   public String toString() {
     System.out.println(super.toString());
     return "Supported Audio Formats: "

@@ -1,7 +1,7 @@
-package GUIProject;
+package guiproject;
 
 /**
- * Object for storing information from Employee Table in DB
+ * Object for storing information from Employee Table in DB.
  *
  * @author Shane Broxson
  * @file EmployeeInfo.java
@@ -13,6 +13,8 @@ public class EmployeeInfo {
   private Boolean management;
 
   /**
+   * EmployeeInfo subclass containing parameters of an Employee.
+   *
    * @param name Full name of Employee
    * @param username Username of Employee
    * @param email Email of Employee
@@ -25,42 +27,74 @@ public class EmployeeInfo {
     this.management = management;
   }
 
-  /** @return Employee name */
+  /**
+   * Returns the Employee name.
+   *
+   * @return Employee name
+   */
   public String getName() {
     return name;
   }
 
-  /** @param name Sets Employee name */
+  /**
+   * Sets the Employee name.
+   *
+   * @param name Sets Employee name
+   */
   public void setName(String name) {
     this.name = name;
   }
 
-  /** @return Employee username */
+  /**
+   * Returns Employee username.
+   *
+   * @return Employee username
+   */
   public String getUsername() {
     return username;
   }
 
-  /** @param username Sets Employee username */
+  /**
+   * Sets the Employee username.
+   *
+   * @param username Sets Employee username
+   */
   public void setUsername(String username) {
     this.username = username;
   }
 
-  /** @return Employee email */
+  /**
+   * Returns Employee email.
+   *
+   * @return Employee email
+   */
   public String getEmail() {
     return email;
   }
 
-  /** @param email Sets Employee email */
+  /**
+   * Sets Employee email.
+   *
+   * @param email Sets Employee email
+   */
   public void setEmail(String email) {
     this.email = email;
   }
 
-  /** @return Management status */
+  /**
+   * Returns if Employee is a manager.
+   *
+   * @return Management status
+   */
   public Boolean getManagement() {
     return management;
   }
 
-  /** @param management Sets Management status */
+  /**
+   * Sets if Employee is manager.
+   *
+   * @param management Sets Management status
+   */
   public void setManagement(Boolean management) {
     this.management = management;
   }
