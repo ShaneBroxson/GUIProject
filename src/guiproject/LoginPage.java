@@ -93,7 +93,6 @@ public class LoginPage {
    */
   private static String reverseString(String id) {
     if (id.isEmpty()) {
-      System.out.println("String is Empty");
       return id;
     }
     // Calling Function Recursively

@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="GUIProject:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/GUIProject_jar</output-path>
+    <root id="archive" name="GUIProject.jar">
+      <element id="module-output" name="GUIProject" />
+      <element id="extracted-dir" path="C:/Program Files (x86)/H2/bin/h2-1.4.199.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/res/h2-1.4.199.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

@@ -294,7 +294,6 @@ public class Controller {
    */
   private static String reverseString(String id) {
     if (id.isEmpty()) {
-      System.out.println("String is Empty");
       return id;
     }
     // Calling Function Recursively
@@ -401,7 +400,8 @@ public class Controller {
     // pulls information from table row and places into object Product
     Product testing =
         productChoice.getItems().get(productChoice.getSelectionModel().getFocusedIndex());
-    System.out.println(testing.getType());
+    //Product tester = productChoice.getItems().get(productChoice.getSelectionModel().getSelectedIndex());
+    //System.out.println(tester.getType());
     // change string to enum type
     ItemType typeSwitch = null;
     switch (testing.getType()) {
