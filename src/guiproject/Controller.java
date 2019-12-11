@@ -428,9 +428,10 @@ public class Controller {
     productionRecorded.setVisible(false);
     addProductError.setVisible(false);
     String quantityString = String.valueOf(quantityComboBox.getValue());
+    System.out.println(quantityString);
     if (quantityComboBox.getValue() == null
         || quantityString.equals("")
-        || !quantityString.matches("[^a-zA-Z]")
+        || quantityString.matches("[^a-zA-Z]")
         || selectedItems.get(0) == null) {
       if (selectedItems.get(0) == null) {
         noProductSelected.setVisible(true);
