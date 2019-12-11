@@ -3,7 +3,7 @@ Project created by Shane Broxson. Made in the fall of 2019. No prior experience 
 ## Demonstration
 ![ProjectGIF](docs/demonstration.gif)
 ## Documentation
-[docs](https://shanebroxson.github.io/GUIProject/docs/html/index.html)
+[docs](https://shanebroxson.github.io/GUIProject/docs/index.html)
 ## Diagrams
 ![Diagram](docs/GUIProject.png)
 ![Diagram](docs/GUI_DB.png)
