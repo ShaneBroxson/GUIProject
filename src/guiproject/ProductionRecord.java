@@ -16,14 +16,6 @@ public class ProductionRecord {
   private Date currentDate;
   private String employee;
 
-  //  /** @param pn Production Number */
-  //  ProductionRecord(int pn) {
-  //    prodNum = pn;
-  //    prodID = 0;
-  //    serialNum = "0";
-  //    currentDate = new Date();
-  //  }
-
   /**
    * ProductionRecord subclass containing a Product and count of Product Type produced.
    *

@@ -198,6 +198,11 @@ public class Controller {
     }
   }
 
+  /**
+   * Generates info for Creating new Employee and adds to DB.
+   *
+   * @param event event
+   */
   @FXML
   void generated_info(ActionEvent event) {
     String firstName = fullName.getText();
@@ -310,6 +315,11 @@ public class Controller {
     log_emp = new LoggedEmployee(userName, isManagement);
   }
 
+  /**
+   * Checks if the Logged In Employee is a Manager or not.
+   *
+   * @param event event
+   */
   @FXML
   void managementAccess(ActionEvent event) {
     if (log_emp.getManagement()) {
@@ -400,8 +410,9 @@ public class Controller {
     // pulls information from table row and places into object Product
     Product testing =
         productChoice.getItems().get(productChoice.getSelectionModel().getFocusedIndex());
-    //Product tester = productChoice.getItems().get(productChoice.getSelectionModel().getSelectedIndex());
-    //System.out.println(tester.getType());
+    // Product tester =
+    // productChoice.getItems().get(productChoice.getSelectionModel().getSelectedIndex());
+    // System.out.println(tester.getType());
     // change string to enum type
     ItemType typeSwitch = null;
     switch (testing.getType()) {
