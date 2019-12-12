@@ -431,14 +431,14 @@ public class Controller {
     System.out.println(quantityString);
     if (quantityComboBox.getValue() == null
         || quantityString.equals("")
-        || quantityString.matches("[^a-zA-Z]")
+        || quantityString.matches("[^\\d]")
         || selectedItems.get(0) == null) {
       if (selectedItems.get(0) == null) {
         noProductSelected.setVisible(true);
       }
       if (quantityComboBox.getValue() == null
           || quantityString.equals("")
-          || !quantityString.matches("[^a-zA-Z]")) {
+          || !quantityString.matches("[^\\d]")) {
         recordProductionError.setVisible(true);
         productionRecorded.setVisible(false);
         addProductError.setVisible(false);
